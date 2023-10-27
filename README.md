@@ -1,4 +1,4 @@
-<p align="center"><img src=" " width="400" alt="StudentProfile Logo"></a></p>
+<p align="center"><img src="studentProfile.png" width="400" alt="StudentProfile Logo"></a></p>
 
 <p align="center">
 
