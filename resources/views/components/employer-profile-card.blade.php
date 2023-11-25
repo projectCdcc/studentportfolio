@@ -54,8 +54,9 @@
     <form method="POST" action="{{ route('logout') }}">
         @csrf
         <div aria-label="footer" class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <button type="button"
-                class="flex items-center space-x-3 py-3 px-4 w-full leading-6 text-lg text-gray-600 focus:outline-none hover:bg-gray-100 rounded-md">
+        <a href="{{ route('logout')}}" onclick="event.preventDefault();
+                            this.closest('form').submit();">
+            <button type="button" class="flex items-center space-x-3 py-3 px-4 w-full leading-6 text-lg text-gray-600 focus:outline-none hover:bg-gray-100 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-7 h-7" width="24" height="24"
                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                     stroke-linejoin="round">
@@ -64,10 +65,9 @@
                     <path d="M9 12h12l-3 -3"></path>
                     <path d="M18 15l3 -3"></path>
                 </svg>
-                <span href="route('logout')"
-                onclick="event.preventDefault();
-                            this.closest('form').submit();">{{ __('Log Out') }}</span>
+                <span href="{{route('logout')}}">{{ __('Log Out') }}</span>
             </button>
+            </a>
         </div>
     </form>
     </div>

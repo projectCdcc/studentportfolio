@@ -40,6 +40,16 @@ class EmployerProfileController extends Controller
     }
 
     /**
+     *  Update the user's profile picture
+     * 
+     */
+
+    public function avatarUpate() {
+
+    }
+
+
+    /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse
