@@ -15,8 +15,14 @@ return new class extends Migration
     {
         Schema::create('employers', function (Blueprint $table) {
             $table->id();
-            $table->integer('userid');
-            $table->string('name');
+            $table->string('organization_name');
+            $table->string('email');
+            $table->string('org_type');
+            $table->string('street');
+            $table->string('city');
+            $table->string('country');
+            $table->text('about');
+            $table->string('avatar');
             $table->timestamps();
         });
     }

@@ -50,6 +50,29 @@ class EmployerRegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->intended('empdashboard');
+        if ($user->type == 'student') {
+            // Redirect to the home route for students
+
+             // Alert logic
+        if (!session()->has('alert_shown')) {
+            session(['alert_shown' => true]);
+            return redirect()->intended('dashboard');
+        } else {
+            return redirect()->intended('dashboard');
+        }
+
+        } else {
+
+            if (!session()->has('alert_shown')) {
+                session(['alert_shown' => true]);
+                return redirect()->intended('employer.dashboard');
+            } else {
+                return redirect()->intended('employer.dashboard');
+            }
+
+
+            // Redirect to the employer route for other roles
+
+        }
     }
 }
