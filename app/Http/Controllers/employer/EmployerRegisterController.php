@@ -21,7 +21,7 @@ class EmployerRegisterController extends Controller
      */
     public function create(): View
     {
-        Redirect::setIntendedUrl(url()->route('empdashboard'));
+        Redirect::setIntendedUrl(url()->route('employer.dashboard'));
         return view('employer.empregister');
     }
 
