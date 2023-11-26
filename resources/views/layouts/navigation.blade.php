@@ -52,7 +52,7 @@
                         
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <!-- Smaller Avatar Image -->
-                            <img class="w-8 h-8 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mr-1" src="/docs/images/people/profile-picture-5.jpg" alt="Bordered avatar">
+                            <img class="w-8 h-8 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mr-1" src="/avatars/{{Auth::user()->avatar}}" alt="Bordered avatar">
     
                         
                         <div>{{ Auth::user()->username }}</div>
@@ -72,7 +72,7 @@
                                 {{ __('Edit Profile') }}
                             </x-dropdown-link>
                         @else
-                            <x-dropdown-link :href="route('empProfile.edit')">
+                            <x-dropdown-link :href="route('empProfile.edit', $id=Auth::user()->id)">
                                 {{ __('Edit Profile') }}
                             </x-dropdown-link>
                         @endif

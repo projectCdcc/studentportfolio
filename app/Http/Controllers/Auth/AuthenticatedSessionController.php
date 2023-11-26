@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+use App\Models\Employer;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -52,6 +53,9 @@ class AuthenticatedSessionController extends Controller
         }
 
         } else {
+            
+            $employer = Employer::where('organization_name', $user->username)->first();
+            session(['avatar' => $employer->avatar]);
 
             if (!session()->has('alert_shown')) {
                 session(['alert_shown' => true]);

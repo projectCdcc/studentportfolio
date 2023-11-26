@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->text('about')->nullable();
-            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }

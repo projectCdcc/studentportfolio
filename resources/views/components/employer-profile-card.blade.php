@@ -2,8 +2,9 @@
     <div
         class=" pt-4 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="flex flex-col items-center pb-10">
-            <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg"
-                alt="Bonnie image" />
+      
+            <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/avatars/{{Auth::user()->avatar}}" alt="Profile Image" />
+           
             <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ Auth::user()->username }}</h5>
             <span class="text-sm text-gray-500 dark:text-gray-400">{{ Auth::user()->type }}</span>
             <div class="flex mt-4 md:mt-6">
@@ -35,7 +36,7 @@
     <div class="pt-3">
     <div aria-label="navigation" class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <nav class="grid gap-1">
-            <a href="{{ route('empProfile.edit')}}"
+            <a href="{{ route('empProfile.edit', $id=Auth::user()->id)}}"
                 class="flex items-center leading-6 space-x-3 py-3 px-4 w-full text-lg text-gray-600 focus:outline-none hover:bg-gray-100 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-7 h-7" width="24" height="24"
                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"

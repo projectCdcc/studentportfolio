@@ -9,7 +9,7 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('empAvatar.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+    <form method="post" action="{{ route('empAvatar.update', $id=Auth::user()->id) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 

@@ -47,7 +47,7 @@ class EmployerProfileController extends Controller
      * 
      */
 
-    public function avatarUpdate(ProfileUpdateRequest $request): RedirectResponse {
+    public function avatarUpdate(ProfileUpdateRequest $request, $id): RedirectResponse {
         /**
          * Validated the array values of inputs. 
          * 
@@ -69,28 +69,35 @@ class EmployerProfileController extends Controller
             
              // Update the user's record in the database with the avatar file name or path
             $user = Auth::user();
-            $employer = Employer::where('organization_name', $user->username)->first();
+           
             
             // Check if the employer has an existing avatar
-            if (!is_null($employer->avatar)) {
+            if (!is_null($user->avatar)) {
                 // Delete the existing avatar file
-                $existingAvatarPath = public_path('avatars') . '/' . $employer->avatar;
+                $existingAvatarPath = public_path('avatars') . '/' . $user->avatar;
                 if (File::exists($existingAvatarPath)) {
                     File::delete($existingAvatarPath);
                 }
-
                 // Check if the user is an employer and the organization_name matches the username
                 if ($user->isEmployer()) {
 
                     // Update the 'avatar' column in the 'employers' table
-                    $employer->update([
+                    $user->update([
+                        'avatar' => $avatarName, // Assuming $avatarName is defined in your code
+                    ]);
+                }
+            } else {
+
+              
+                // Check if the user is an employer and the organization_name matches the username
+                if ($user->isEmployer()) {
+
+                    // Update the 'avatar' column in the 'employers' table
+                    $user->update([
                         'avatar' => $avatarName, // Assuming $avatarName is defined in your code
                     ]);
                 }
             }
-
-            
-
             return Redirect::route('empProfile.edit')->with('upload', 'profile-updated');
         } else {
             return Redirect::route('empProfile.edit')->with('upload', 'Profile not updated!');

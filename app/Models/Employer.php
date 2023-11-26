@@ -21,6 +21,5 @@ class Employer extends Model
         'street',
         'country',
         'about',
-        'avatar',
     ];
 }
