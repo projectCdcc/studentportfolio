@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('street')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
+            $table->string('establish_year')->nullable();
             $table->text('about')->nullable();
             $table->timestamps();
         });

@@ -9,7 +9,7 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('orgDetail.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+    <form method="post" action="{{ route('orgDetail.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
 
@@ -40,6 +40,12 @@
     </div>
 
     <div class="mt-4">
+        <x-input-label for="country" :value="__('Established in')" />
+        <x-text-input id="country" name="establish_year" type="text" class="mt-1 block w-full" :value="old('country', 'Year')" required autofocus autocomplete="country" />
+        <x-input-error class="mt-2" :messages="$errors->get('country')" />
+    </div>
+
+    <div class="mt-4">
         <x-input-label for="about" :value="__('About')" />
         <textarea id="about" name="about" rows="4" class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="About here..."></textarea>
         <x-input-error class="mt-2" :messages="$errors->get('about')" />
@@ -48,7 +54,7 @@
 
 
         <div class="flex items-center gap-4">
-            <x-upload-button>{{ __('Save') }}</x-upload-button>
+            <x-org-button>{{ __('Save') }}</x-org-button>
 
             @if (session('update') === 'profile-updated')
                 <p

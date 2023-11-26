@@ -19,6 +19,8 @@ class Employer extends Model
         'email',
         'org_type',
         'street',
+        'city',
+        'establish_year',
         'country',
         'about',
     ];

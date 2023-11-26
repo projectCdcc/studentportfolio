@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Employer;
+use App\Models\User;
 use Illuminate\Support\Facades\File; 
 
 
@@ -62,22 +63,28 @@ class EmployerProfileController extends Controller
             $uniqueName = $request->file('avatar')->hashName();
             $avatarName = $uniqueName;
 
-            /**
-             * move the file to public/avatars folder
-             */
-            $request->avatar->move(public_path('avatars'), $avatarName);
-            
+          
              // Update the user's record in the database with the avatar file name or path
-            $user = Auth::user();
+            $user = User::where('id', $id)->first();
            
             
             // Check if the employer has an existing avatar
             if (!is_null($user->avatar)) {
+
                 // Delete the existing avatar file
-                $existingAvatarPath = public_path('avatars') . '/' . $user->avatar;
+                $existingAvatarPath = public_path('avatars') . '/' .$user->avatar;
+
+                // dd($existingAvatarPath);
                 if (File::exists($existingAvatarPath)) {
                     File::delete($existingAvatarPath);
                 }
+
+
+                  /**
+                   * move the file to public/avatars folder
+                   */
+                $request->avatar->move(public_path('avatars'), $avatarName);
+            
                 // Check if the user is an employer and the organization_name matches the username
                 if ($user->isEmployer()) {
 
@@ -88,6 +95,11 @@ class EmployerProfileController extends Controller
                 }
             } else {
 
+                  /**
+                   * move the file to public/avatars folder
+                   */
+                    $request->avatar->move(public_path('avatars'), $avatarName);
+            
               
                 // Check if the user is an employer and the organization_name matches the username
                 if ($user->isEmployer()) {
@@ -131,8 +143,9 @@ class EmployerProfileController extends Controller
                  'street' => $request->input('street'),
                  'city' => $request->input('city'),
                  'country' => $request->input('country'),
+                 'establish_year' => $request->input('establish_year'),
                  'about' => $request->input('about'),
-                 // Add other fields as needed
+                 
              ]);
          }
  
@@ -140,6 +153,28 @@ class EmployerProfileController extends Controller
          return redirect()->route('empProfile.edit')->with('update', 'Profile updated successfully.');
      
     }
+
+
+
+    /**
+     * Employer View details 
+     * 
+     */
+
+    public function viewDetail(Request $request): view {
+
+         // Retrieve the authenticated user
+         $user = $request->user();
+
+        // Update employer-specific information
+        $employer = Employer::where('organization_name', $user->username)->first();
+
+        return view('employer.emp-profile-detail', [
+            'employer' => $employer,
+        ]);
+    }
+
+
 
 
 
