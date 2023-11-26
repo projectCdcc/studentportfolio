@@ -109,6 +109,41 @@ class EmployerProfileController extends Controller
 
 
     /**
+     * Update Organization Information 
+     * 
+     */
+
+    public function orgUpdate(ProfileUpdateRequest $request): RedirectResponse {
+         // Retrieve the authenticated user
+         $user = $request->user();
+
+         // Fill the user model with validated data
+         $user->fill($request->validated());
+ 
+         // Update employer-specific information
+         $employer = Employer::where('organization_name', $user->username)->first();
+ 
+         // Check if the employer exists
+         if ($employer) {
+             // Update employer-specific fields
+             $employer->update([
+                 'org_type' => $request->input('org_type'),
+                 'street' => $request->input('street'),
+                 'city' => $request->input('city'),
+                 'country' => $request->input('country'),
+                 'about' => $request->input('about'),
+                 // Add other fields as needed
+             ]);
+         }
+ 
+         // Redirect back to the profile edit page with a success message
+         return redirect()->route('empProfile.edit')->with('update', 'Profile updated successfully.');
+     
+    }
+
+
+
+    /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse

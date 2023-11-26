@@ -20,6 +20,14 @@ class ProfileUpdateRequest extends FormRequest
             'name' => ['string', 'max:255'],
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
             'avatar' => ['image', 'mimes:jpeg,png,jpg,g if', 'max:2048'], // Rules for avatar upload
+
+            // org details 
+            'org_type' => 'required|string|max:255',
+            'street' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'about' => 'nullable|string',
+            
         ];
     }
 

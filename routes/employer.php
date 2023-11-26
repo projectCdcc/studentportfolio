@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/employer/profile', [EmployerProfileController::class, 'edit'])->name('empProfile.edit');
     Route::patch('/employer/profile', [EmployerProfileController::class, 'update'])->name('empProfile.update');
     Route::patch('/employer/avatarUpdate/{id}', [EmployerProfileController::class, 'avatarUpdate'])->name('empAvatar.update');
+    Route::patch('/employer/orgUpdate', [EmployerProfileController::class, 'orgUpdate'])->name('orgDetail.update');
     Route::delete('/employer/profile', [EmployerProfileController::class, 'destroy'])->name('empProfile.destroy');
 });
 
