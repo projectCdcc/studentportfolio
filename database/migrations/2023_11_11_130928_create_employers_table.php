@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('organization_name');
             $table->string('email');
-            $table->string('org_type');
-            $table->string('street');
-            $table->string('city');
-            $table->string('country');
-            $table->text('about');
-            $table->string('avatar');
+            $table->string('org_type')->nullable();
+            $table->string('street')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->text('about')->nullable();
+            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }

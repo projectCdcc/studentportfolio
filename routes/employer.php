@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Employer\EmployerProfileController;
 use App\Http\Controllers\Employer\EmployerRegisterController;
+use App\Http\Controllers\Employer\TransferUsersToEmployers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::get('/employer/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/employer/profile', [EmployerProfileController::class, 'edit'])->name('empProfile.edit');
     Route::patch('/employer/profile', [EmployerProfileController::class, 'update'])->name('empProfile.update');
+    Route::patch('/employer/avatarUpdate', [EmployerProfileController::class, 'avatarUpdate'])->name('empAvatar.update');
     Route::delete('/employer/profile', [EmployerProfileController::class, 'destroy'])->name('empProfile.destroy');
 });
 
@@ -37,6 +39,3 @@ Route::middleware('guest')->group(function () {
     Route::post('empRegister', [EmployerRegisterController::class, 'store'])->name('empRegister.store');
 
 });
-
-
-//require __DIR__.'/auth.php';

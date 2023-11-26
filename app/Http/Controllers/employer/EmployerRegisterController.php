@@ -4,6 +4,7 @@ namespace App\Http\Controllers\employer;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Employer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -43,6 +44,11 @@ class EmployerRegisterController extends Controller
             'email' => $request->email,
             'type' => 'employer',
             'password' => Hash::make($request->password),
+        ]);
+
+        $employer = Employer::create([
+            'organization_name' => $request->username,
+            'email' => $request->email,
         ]);
 
 

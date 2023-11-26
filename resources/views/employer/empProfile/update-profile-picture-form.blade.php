@@ -9,7 +9,7 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('empProfile.update') }}" class="mt-6 space-y-6" e>
+    <form method="post" action="{{ route('empAvatar.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -21,9 +21,9 @@
 
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-upload-button>{{ __('Save') }}</x-upload-button>
 
-            @if (session('status') === 'profile-updated')
+            @if (session('upload') === 'profile-updated')
                 <p
                     x-data="{ show: true }"
                     x-show="show"
