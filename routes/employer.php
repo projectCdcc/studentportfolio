@@ -3,6 +3,7 @@
 use App\Http\Controllers\Employer\EmployerProfileController;
 use App\Http\Controllers\Employer\EmployerRegisterController;
 use App\Http\Controllers\Employer\TransferUsersToEmployers;
+use App\Http\Controllers\Employer\EmployerJobController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/employer/profile', [EmployerProfileController::class, 'destroy'])->name('empProfile.destroy');
     Route::get('/employer/profile/detail', [EmployerProfileController::class, 'viewDetail'])->name('empProfile.detail');
 });
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/employer/jobs', [EmployerJobController::class, 'index'])->name('empJob.show');
+ });
 
 Route::middleware('guest')->group(function () {
     Route::get('empRegister', [EmployerRegisterController::class, 'create'])

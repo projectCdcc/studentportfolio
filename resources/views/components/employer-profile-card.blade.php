@@ -2,9 +2,9 @@
     <div
         class=" pt-4 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="flex flex-col items-center pb-10">
-      
+
             <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/avatars/{{Auth::user()->avatar}}" alt="Profile Image" />
-           
+
             <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ Auth::user()->username }}</h5>
             <span class="text-sm text-gray-500 dark:text-gray-400">{{ Auth::user()->type }}</span>
             <div class="flex mt-4 md:mt-6">
@@ -15,18 +15,18 @@
     </div>
 
 
-    
+
     <div class="pt-3">
     <div aria-label="navigation" class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <nav class="grid gap-1">
-            <a href="#"
+            <a href="{{ route('empJob.show')}}"
                 class="flex items-center leading-6 space-x-3 py-3 px-4 w-full text-lg text-gray-600 focus:outline-none hover:bg-gray-100 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M1 10c1.5 1.5 5.25 3 9 3s7.5-1.5 9-3m-9-1h.01M2 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1ZM14 5V3a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v2h8Z"/>
                 </svg>
 
-                <span >{{ __('Post Jobs') }}</span>
+                <span >{{ __('Posted Jobs') }}</span>
             </a>
         </nav>
     </div>

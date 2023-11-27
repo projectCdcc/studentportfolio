@@ -16,7 +16,7 @@
     <div class="grid grid-cols-2 gap-4">
         <div>
             <x-input-label for="org_type" :value="__('Organization Type')" />
-            <x-text-input id="org_type" name="org_type" type="text" class="mt-1 block w-full" :value="old('org_type', 'Organization type')" required autofocus autocomplete="org_type" />
+            <x-text-input id="org_type" name="org_type" type="text" class="mt-1 block w-full text-#333333" :value="old('org_type', 'Organization type')" required autofocus autocomplete="org_type" />
             <x-input-error class="mt-2" :messages="$errors->get('org_type')" />
         </div>
 
