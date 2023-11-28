@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('country');
             $table->string('job_type');
+            $table->text('requirement');
             $table->text('how_to');
             $table->text('description');
             $table->string('company');

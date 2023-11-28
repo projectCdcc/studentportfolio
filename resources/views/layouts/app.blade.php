@@ -22,6 +22,8 @@
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
 
+        <script src="{{ asset('vendor/bladewind/js/helpers.js') }}" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 
     </head>
     <body class="font-sans antialiased">
@@ -43,8 +45,7 @@
             </main>
         </div>
 
-        <script src="{{ asset('vendor/bladewind/js/helpers.js') }}" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+       
 
     </body>
 </html>

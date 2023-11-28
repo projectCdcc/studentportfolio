@@ -37,10 +37,6 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user(); // Retrieve the authenticated user
 
-
-
-
-
         if ($user->type == 'student') {
             // Redirect to the home route for students
 
