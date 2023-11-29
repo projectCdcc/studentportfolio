@@ -43,9 +43,8 @@ Route::middleware('guest')->group(function () {
 /********************* Job routes **********************/
 
 Route::middleware('auth')->group(function () {
-    Route::get('/employer/jobs{id}', [EmployerJobController::class, 'index'])->name('empJob.show');
+    Route::get('/employer/jobs/id={id}', [EmployerJobController::class, 'index'])->name('empJob.show');
     Route::post('/employer/jobs/store/{id}', [EmployerJobController::class, 'store'])->name('empJob.store');
     Route::delete('/employer/{userId}/jobs/{jobId}', [EmployerJobController::class, 'destroy'])->name('employer.job.destroy');
 });
 
- 
