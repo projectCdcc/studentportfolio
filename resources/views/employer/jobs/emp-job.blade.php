@@ -114,6 +114,7 @@
                                                     data-job-type="{{ $job->job_type }}"
                                                     data-requirement="{{ $job->requirement }}"
                                                     data-how-to="{{ $job->how_to }}"
+
                                                     class="flex w-full items-center py-2 px-4 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                     <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                         viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -430,6 +431,43 @@
                 </div>
             </div>
 
+            <!-- jQuery script -->
+                    <script>
+                        $(document).ready(function () {
+                            var previewButtons = document.querySelectorAll('[data-modal-target="readJobModal"]');
+
+                            previewButtons.forEach(function (button) {
+                                button.addEventListener('click', function () {
+                                    var jobTitle = button.getAttribute('data-title');
+                                    var city = button.getAttribute('data-city');
+                                    var country = button.getAttribute('data-country');
+                                    var company = button.getAttribute('data-company');
+                                    var description = button.getAttribute('data-description');
+                                    var category = button.getAttribute('data-category');
+                                    var jobType = button.getAttribute('data-job-type');
+                                    var requirement = button.getAttribute('data-requirement');
+                                    var howTo = button.getAttribute('data-how-to');
+                                    
+                                    // Combine city and country
+                                    var location = city + ', ' + country;
+
+                                    // Set the modal title dynamically
+                                    $('#readJobModal #modalTitle').text(jobTitle);
+                                    $('#readJobModal #location').text(location);
+                                    $('#readJobModal #company').text(company);
+                                    $('#readJobModal #description').text(description);
+                                    $('#readJobModal #category').text(category);
+                                    $('#readJobModal #jobtype').text(jobType);
+                                    $('#readJobModal #requirement').text(requirement);
+                                    $('#readJobModal #howto').text(howTo);
+                                    
+                                });
+                            });
+                        });
+                    </script>
+
+         
+            
 
             <!-- Read modal -->
             <div id="readJobModal" tabindex="-1" aria-hidden="true"
@@ -441,9 +479,9 @@
                             <!-- Modal header -->
                             <div class="flex justify-between mb-4 rounded-t sm:mb-5">
                                 <div class="text-lg text-gray-900 md:text-xl dark:text-white">
-                                    <h1 class="font-bold" class="modal-city"></h1>
-                                    <p class="text-sm">Location: {{ $job->city }} {{ $job->country }}</p>
-                                    <p class="text-sm">Company: {{ $job->company }} </p>
+                                    <h1 class="font-bold" id="modalTitle"></h1>
+                                    <p class="text-sm" id="location"></p>
+                                    <p class="text-sm" id="company"></p>
                                 </div>
                                 <div>
                                     <button type="button"
@@ -457,27 +495,28 @@
                                         </svg>
                                         <span class="sr-only">Close modal</span>
                                     </button>
+
                                 </div>
                             </div>
                             <dl>
                                 <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Description</dt>
-                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $job->description }}</dd>
+                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="description"></dd>
                                 <div class="flex mb-4">
                                     <div class="mr-4">
                                         <dt class="font-semibold leading-none text-gray-900 dark:text-white">Category</dt>
-                                        <dd class="font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $job->category }}</dd>
+                                        <dd class="font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="category"></dd>
                                     </div>
                                     <div>
                                         <dt class="font-semibold leading-none text-gray-900 dark:text-white">Type</dt>
-                                        <dd class="font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $job->job_type }}</dd>
+                                        <dd class="font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="jobtype"></dd>
                                     </div>
                                 </div>
 
                                 <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Requirement</dt>
-                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $job->requirement }}</dd>
+                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="requirement"></dd>
 
                                 <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">How to Apply</dt>
-                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $job->how_to }}</dd>
+                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="howto"></dd>
 
 
                             </dl>
@@ -516,50 +555,14 @@
                     </div>
                 </div>
             </div>
+            
+          
+            
 
-            <!-- Add this script to your HTML file after the modal HTML -->
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    var modalButtons = document.querySelectorAll('[data-modal-toggle="readJobModal"]');
 
-                    modalButtons.forEach(function (button) {
-                        button.addEventListener('click', function () {
-                            var modalTarget = button.getAttribute('data-modal-target');
 
-                            // Get other data attributes
-                            var title = button.getAttribute('data-title');
-                            var city = button.getAttribute('data-city');
-                            var country = button.getAttribute('data-country');
-                            var company = button.getAttribute('data-company');
-                            var description = button.getAttribute('data-description');
-                            var category = button.getAttribute('data-category');
-                            var jobType = button.getAttribute('data-job-type');
-                            var requirement = button.getAttribute('data-requirement');
-                            var howTo = button.getAttribute('data-how-to');
+            
 
-                            // Display the data in the modal
-                            displayDataInModal(modalTarget, title, city, country, company, description, category, jobType, requirement, howTo);
-                        });
-                    });
-
-                    function displayDataInModal(modalTarget, title, city, country, company, description, category, jobType, requirement, howTo) {
-                        var modal = document.getElementById(modalTarget);
-
-                        // Set the content of the modal
-                        modal.querySelector('.modal-title').textContent = title;
-                        modal.querySelector('.modal-city').textContent = 'Location: ' + city + ' ' + country;
-                        modal.querySelector('.modal-company').textContent = 'Company: ' + company;
-                        modal.querySelector('.modal-description').textContent = description;
-                        modal.querySelector('.modal-category').textContent = 'Category: ' + category;
-                        modal.querySelector('.modal-job-type').textContent = 'Type: ' + jobType;
-                        modal.querySelector('.modal-requirement').textContent = 'Requirement: ' + requirement;
-                        modal.querySelector('.modal-how-to').textContent = 'How to Apply: ' + howTo;
-
-                        // Show the modal using Bootstrap modal method
-                        $(modal).modal('show');
-                    }
-                });
-            </script>
 
 
 
