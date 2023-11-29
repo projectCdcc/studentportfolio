@@ -1,54 +1,81 @@
 <?php
 
-namespace App\Http\Controllers\employer;
+namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Job;
+use App\Models\User;
+use App\Models\Employer;
+use App\Http\Requests\JobRequest;
+use Illuminate\Support\Facades\Redirect;
+
+
 
 class EmployerJobController extends Controller
 {
-    //index method
-    public function index() {
-        return view('employer.jobs.emp-job');
-    }
+    //index method (userid)
+    public function index($id) {
 
-    
-    public function store(Request $request, $id) {
-        $request->validate([
-            'title' =>'required',
-            'city'=>'required',
-            'country'=>'required',
-            'type'=> 'required',
-            'category'=> 'required',
-            'description' => 'required',
-            'requirement' => 'required',
-            'company' => 'required',
-            'apply'=>'required',
-        ]);
-
-        $user = User::where('id', $id)->first();    
+        $user = User::where('id', $id)->first();
 
         $employer = Employer::where('organization_name', $user->username)->first();
 
-        $username = $user->username;
+        $jobs = Job::where('company', $employer->organization_name)->paginate(10);
 
-        $data['title']= $request->title;
-        $data['city']=$request->city;
-        $data['country']=$request->country;
-        $data['job_type']=$request->type;
-        $data['category']=$request->category;
-        $data['description']=$request->description;
-        $data['requirement']=$request->requirement;
-        $data['how_to']=$request->apply;
-        $data['company']= $employer()->organization;
-        $job = Job::create($data);
+
+        return view('employer.jobs.emp-job')->with('jobs', $jobs);
+    }
+
+
+
+
+
+
+    
+    //create job
+    public function store(JobRequest $request, $id) 
+    {
+        $request->validated();
+        $user = User::where('id', $id)->first();
+        $employer = Employer::where('organization_name', $user->username)->first();
+
+        $job = Job::create([
+            'title'=>$request->title,
+            'city'=>$request->city,
+            'country'=>$request->country,
+            'job_type'=>$request->type,
+            'category' => $request->category,
+            'description'=>$request->description,
+            'requirement'=>$request->requirement,
+            'how_to'=>$request->apply,
+            'company'=>$employer->organization_name,
+        ]);
 
         if(!$job) {
-            return Redirect::route('empJob.show')->with('error', 'profile-is-not-updated');
+            return Redirect::route('empJob.show', $user->id)->with('error', 'profile-is-not-updated');
+        } else {
+            return Redirect::route('empJob.show', $user->id)->with('success', 'profile-updated');
         }
+    }
 
-        return Redirect::route('empJob.show')->with('success', 'profile-updated');
-      
+
+    //delete job
+    public function destroy($userId, $jobId)
+    {
+        // Find user
+            $user = User::findOrFail($userId);
+
+        // Assuming the organization_name is the same as username
+            $employer = $user->username;
+
+        // Find the job based on the job ID and company (organization_name)
+            $job = Job::where('id', $jobId)->where('company', $employer)->first();
+
+        // Delete the job
+            $job->delete();
+
+        return Redirect::route('empJob.show', $user->id)->with('success', 'Job deleted successfully');
     }
 
 

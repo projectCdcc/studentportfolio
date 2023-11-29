@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\employer;
+namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -56,18 +56,6 @@ class EmployerRegisterController extends Controller
 
         Auth::login($user);
 
-        if ($user->type == 'student') {
-            // Redirect to the home route for students
-
-             // Alert logic
-        if (!session()->has('alert_shown')) {
-            session(['alert_shown' => true]);
-            return redirect()->intended('dashboard');
-        } else {
-            return redirect()->intended('dashboard');
-        }
-
-        } else {
 
             if (!session()->has('alert_shown')) {
                 session(['alert_shown' => true]);
@@ -79,6 +67,6 @@ class EmployerRegisterController extends Controller
 
             // Redirect to the employer route for other roles
 
-        }
+        
     }
 }

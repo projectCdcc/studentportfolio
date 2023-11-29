@@ -19,7 +19,7 @@
     <div class="pt-3">
     <div aria-label="navigation" class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <nav class="grid gap-1">
-            <a href="{{ route('empJob.show')}}"
+            <a href="{{ route('empJob.show', $id=Auth::user()->id)}}"
                 class="flex items-center leading-6 space-x-3 py-3 px-4 w-full text-lg text-gray-600 focus:outline-none hover:bg-gray-100 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
