@@ -9,6 +9,59 @@
         </p>
     </header>
 
+    <!-- Post job Setting -->
+    @php
+        $jobType = [
+        'Fulltime',
+        'Internship',
+        'Opportunity',
+        ];
+
+        $countries = [
+        'Brunei',
+        'Cambodia',
+        'Indonesia',
+        'Laos',
+        'Malaysia',
+        'Myanmar',
+        'Philippines',
+        'Singapore',
+        'Thailand',
+        'Vietnam',
+        'Japan',
+        'United Kingdom',
+        'United States',
+        ];
+
+        $jobCategories = [
+        'Accounting',
+        'Administration',
+        'Banking and Financial Services',
+        'Customer Service',
+        'Creative and Design',
+        'Education and Training',
+        'Engineering and Construction',
+        'Healthcare',
+        'Human Resources',
+        'Information Technology',
+        'Legal',
+        'Manufacturing',
+        'Marketing and PR',
+        'Media and Communication',
+        'Real Estate',
+        'Retail',
+        'Sales',
+        'Science',
+        'Social Services',
+        'Tourism and Travel',
+        'Transport and Logistics',
+        ];
+
+        $selected = [
+
+        ];
+    @endphp
+
     <form method="post" action="{{ route('orgDetail.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')

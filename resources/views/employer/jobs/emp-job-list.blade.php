@@ -9,7 +9,7 @@
             <h1 class="font-medium text-2xl bg-purple py-2 text-purple-900 uppercase">Opening Jobs</h1>
 
 
-            <div class="pb-4 pt-2">
+            <div class="pb-8 pt-2">
                 @if(count($jobs) > 0)
                         <div class="relative overflow-x-auto">
                             <table class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-400 border table-fixed">
@@ -41,7 +41,7 @@
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" 
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-wrap dark:text-white border-l border-t w-1/5 overflow-hidden">
-                                            <a href="{{ route('employer.job.detail', [$id=$job->id]) }}">{{ $job->title}}</a>
+                                            <a href="{{ route('employer.job.detail', [$id=$job->id]) }}" class="text-blue-800 hover:underline">{{ $job->title}}</a>
                                         </th>
                                         
                                         <td class="px-6 py-4 border-l border-t w-1/5 uppercase">

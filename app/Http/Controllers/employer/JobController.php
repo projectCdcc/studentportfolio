@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Job;
+use App\Models\Employer;
 
 class JobController extends Controller
 {
@@ -24,7 +25,9 @@ class JobController extends Controller
         // Retrive all jobs from the jobs table as a collection
         $job = Job::where('id', $id)->first();
 
-        return view('employer.jobs.emp-job-detail')->with('job', $job);
+        $company = Employer::where('organization_name', $job->company)->first();
+
+        return view('employer.jobs.emp-job-detail')->with(['job' => $job, 'company' => $company]);
       }
 
 }
