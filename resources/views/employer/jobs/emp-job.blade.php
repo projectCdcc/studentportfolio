@@ -21,30 +21,12 @@
                             class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                             <div class="w-full md:w-1/2">
 
-                                <form class="flex items-center">
-                                    <label for="simple-search" class="sr-only">Search</label>
-                                    <div class="relative w-full">
-                                        <div
-                                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                                fill="currentColor" viewbox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <input type="text" id="simple-search"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Search" required="">
-                                    </div>
-                                </form>
                             </div>
                             <div
                                 class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                                 <button type="button" id="createProductModalButton" data-modal-target="createJobModal"
                                     data-modal-toggle="createJobModal"
-                                    class="flex items-center justify-center inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    class="flex items-center justify-center inline-flex items-center px-4 py-2 text-sm font-medium text-center bg-purple-900 text-white rounded-lg hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                         <path clip-rule="evenodd" fill-rule="evenodd"
@@ -58,8 +40,8 @@
                         <div class="overflow-x-auto">
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <thead
-                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr>
+                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-t border-gray-300">
+                                    <tr class="border-b border-gray-300">
                                         <th scope="col" class="px-4 py-4">Title</th>
                                         <th scope="col" class="px-4 py-3">Company</th>
                                         <th scope="col" class="px-4 py-3">Location</th>
@@ -348,7 +330,7 @@
 
                             </div>
                             <button type="submit"
-                                class="flex items-center justify-center inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                class="flex items-center justify-center inline-flex items-center px-4 py-2 text-sm font-medium text-center bg-purple-900 text-white rounded-lg hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewbox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -361,7 +343,7 @@
                     </div>
                 </div>
             </div>
-            
+
              <!-- jQuery script -->
     <script>
         $(document).ready(function () {
@@ -389,12 +371,12 @@
                     $('#updateJobModal #jobTypeInput').val(jobType);
                     $('#updateJobModal #requirementInput').val(requirement);
                     $('#updateJobModal #howToInput').val(howTo);
-                   
+
                 });
             });
         });
     </script>
-            
+
 
             <!-- Update modal -->
             <div id="updateJobModal" tabindex="-1" aria-hidden="true"
@@ -430,14 +412,14 @@
                                 <div class="sm:col-span-2">
                                     <div>
                                         <label for="name"class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job Title</label>
-                                        <input type="title" name="title" id="jobTitleInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        <input type="title" required="" name="title" id="jobTitleInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     </div>
                                 </div>
 
                                 <div>
                                     <label for="city"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
-                                    <input type="text" name="city" id="cityInput"
+                                    <input type="text" name="city" id="cityInput" required=""
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         >
                                 </div>
@@ -445,7 +427,7 @@
                                 <div>
                                     <label for="country"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
-                                    <select id="category" name="country"
+                                    <select id="category" name="country" required=""
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <option value="" disabled selected>Select Country</option>
                                         @foreach($countries as $item)
@@ -461,7 +443,7 @@
                                     <label for="jobType"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job
                                         Type</label>
-                                    <select id="category" name="type"
+                                    <select id="category" name="type" required=""
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <option value="" disabled selected>Select jobtype</option>
                                         @foreach($jobType as $item)
@@ -476,7 +458,7 @@
                                 <div>
                                     <label for="category"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                                    <select id="category" name="category"
+                                    <select id="category" name="category" required=""
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <option value="" disabled selected>Select an option</option>
                                         @foreach($jobCategories as $item)
@@ -492,7 +474,7 @@
                                 <div class="sm:col-span-2">
                                     <label for="description"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                                    <textarea id="descriptionInput" name="description" rows="4"
+                                    <textarea id="descriptionInput" name="description" rows="4" required=""
                                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         ></textarea>
                                 </div>
@@ -500,7 +482,7 @@
                                 <div class="sm:col-span-2">
                                     <label for="requirement"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Requirement</label>
-                                    <textarea id="requirementInput" name="requirement" rows="4"
+                                    <textarea id="requirementInput" name="requirement" rows="4" required=""
                                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         placeholder="Write job requirement here"></textarea>
                                 </div>
@@ -509,7 +491,7 @@
                                     <label for="howTo"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">How To
                                         Apply</label>
-                                    <textarea id="howToInput" name="apply" rows="4"
+                                    <textarea id="howToInput" name="apply" rows="4" required=""
                                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         placeholder="Write How to apply job here"></textarea>
                                 </div>
@@ -518,7 +500,7 @@
 
                             <div class="flex items-center space-x-4">
                                 <button type="submit"
-                                    class="flex items-center justify-center inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update
+                                    class="flex items-center justify-center inline-flex items-center px-4 py-2 text-sm font-medium text-center bg-purple-900 text-white rounded-lg hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update
                                     Job
                                 </button>
 
@@ -539,7 +521,7 @@
 
 
                         <!-- Update Script -->
-
+                        @isset($job)
                         <script>
                             $(document).ready(function () {
                                 // Set the initial form action
@@ -571,6 +553,8 @@
                                 });
                             });
                         </script>
+
+                        @endisset
 
                         <!-- Confirmation model  -->
 
@@ -699,7 +683,7 @@
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-3 sm:space-x-4">
                             <button type="button"
-                                class="flex items-center justify-center inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                class="flex items-center justify-center inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-purple-900 rounded-lg hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor"
                                     viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -711,11 +695,13 @@
                                 Edit
                             </button>
                             <button type="button"
-                                class="flex w-full items-center bg-gray-200 rounded-lg py-2 px-4 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">Preview</button>
+                                class="flex w-full items-center bg-gray-200 rounded-lg py-2 px-4 hover:bg-gray-500 dark:hover:bg-gray-600 dark:hover:text-white text-gray-800 dark:text-gray-200">View Details</button>
                         </div>
+
+                        @isset($job)
                         <button type="button" data-modal-target="deleteModal" data-modal-toggle="deleteModal"
                             data-job-id="{{ $job->id }}"
-                            class="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                            class="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                             <svg aria-hidden="true" class="w-5 h-5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -724,6 +710,7 @@
                             </svg>
                             Delete
                         </button>
+                        @endisset
                     </div>
                 </div>
             </div>

@@ -23,9 +23,9 @@
                         </x-nav-link>
                     @endif
                 @endauth
-                    
+
                     <x-nav-link :href="route('employer.job.list')" :active="request()->routeIs('employer.job.list')">
-                        {{ __('Job Lists') }}
+                        {{ __('Jobs List') }}
                     </x-nav-link>
 
                     @auth
@@ -98,7 +98,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
-        
+
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">

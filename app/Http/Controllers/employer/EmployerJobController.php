@@ -28,9 +28,9 @@ class EmployerJobController extends Controller
         return view('employer.jobs.emp-job')->with('jobs', $jobs);
     }
 
-    
+
     //create job
-    public function store(JobRequest $request, $id) 
+    public function store(JobRequest $request, $id)
     {
         $request->validated();
         $user = User::where('id', $id)->first();
@@ -64,7 +64,7 @@ class EmployerJobController extends Controller
             // Return the collection of jobs
             return view('employer.jobs.emp-job-list')->with('jobs', $jobs);
         }
-            
+
 
     //update job
     public function update(JobRequest $request, $id) {
