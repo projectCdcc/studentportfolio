@@ -5,13 +5,14 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ Auth::check() ? (Auth::user()->role == 'student' ? route('dashboard') : route('employer.dashboard')) : route('welcome') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                @auth
                     @if (Auth::user()->role == 'student')
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
@@ -21,8 +22,9 @@
                             {{ __('Dashboard') }}
                         </x-nav-link>
                     @endif
-
-                    <x-nav-link :href="route('employer.dashboard')" :active="request()->routeIs('dashboard')">
+                @endauth
+                    
+                    <x-nav-link :href="route('employer.job.list')" :active="request()->routeIs('employer.job.list')">
                         {{ __('Job Lists') }}
                     </x-nav-link>
 
@@ -43,6 +45,7 @@
                 </div>
             </div>
 
+        @auth
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
 
@@ -95,6 +98,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+        
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -141,4 +145,6 @@
             </div>
         </div>
     </div>
+
+    @endauth
 </nav>

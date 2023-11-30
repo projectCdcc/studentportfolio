@@ -43,9 +43,14 @@ Route::middleware('guest')->group(function () {
 /********************* Job routes **********************/
 
 Route::middleware('auth')->group(function () {
-    Route::get('/employer/jobs/id={id}', [EmployerJobController::class, 'index'])->name('empJob.show');
-    Route::post('/employer/jobs/store/{id}', [EmployerJobController::class, 'store'])->name('empJob.store');
-    Route::delete('/employer/{userId}/jobs/{jobId}', [EmployerJobController::class, 'destroy'])->name('employer.job.destroy');
-    Route::post('/employer/jobs/update/id={id}', [EmployerJobController::class, 'update'])->name('employer.job.update');
+    Route::get('/employer/job/id={id}', [EmployerJobController::class, 'index'])->name('empJob.show');
+    Route::post('/employer/job/store/{id}', [EmployerJobController::class, 'store'])->name('empJob.store');
+    Route::delete('/employer/{userId}/job/{jobId}', [EmployerJobController::class, 'destroy'])->name('employer.job.destroy');
+    Route::post('/employer/job/update/id={id}', [EmployerJobController::class, 'update'])->name('employer.job.update');
 });
 
+
+
+/***************** Stand alone route */
+
+Route::get('/employer/job/list', [EmployerJobController::class, 'jobList'])->name('employer.job.list');
