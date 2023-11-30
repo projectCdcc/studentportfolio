@@ -19,7 +19,7 @@
 </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-white bg-gray-100 dark:bg-gray-900">
-            
+
         <!-- Navigation bar -->
         <nav x-data="{ open: true }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                 <!-- Primary Navigation Menu -->
@@ -28,7 +28,10 @@
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <a href="{{ Auth::check() ? (Auth::user()->role == 'student' ? route('dashboard') : route('employer.dashboard')) : route('welcome') }}">
+
+                                <!-- Auth::check() ? (Auth::user()->role == 'student' ? route('dashboard') : route('employer.dashboard')) :  -->
+
+                                <a href="{{ route('welcome') }}">
                                     <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                                 </a>
                             </div>
@@ -49,12 +52,13 @@
                             </div>
                         </div>
 
+
                         <!-- Right menu -->
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
 
                             <!-- Login -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <x-nav-link :href="route('dashboard')">
+                                <x-nav-link :href="route('login')">
                                     {{ __('Log in') }}
                                 </x-nav-link>
                             </div>
@@ -147,10 +151,30 @@
                     </div>
                 </div>
             </nav>
-        
-        
-        
+
+
+            <!-- Hero Section  -->
+
+            <header class="bg-white dark:bg-gray-900">
+
+                <div class="w-full bg-center bg-cover h-screen" style="background-image: url('https://scontent.fbkk5-5.fna.fbcdn.net/v/t1.6435-9/175354535_411903079885079_3092647609897957512_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=dd63ad&_nc_eui2=AeGqluCmPx8B_EIPcqMpqHPLSw4hVNZSUfxLDiFU1lJR_Hl721Rx-B_KQqgG2BGk4obLGjGyvLNWJ1qMXBjPVBTp&_nc_ohc=xVxzuhs_mEkAX-Lwwk3&_nc_ht=scontent.fbkk5-5.fna&oh=00_AfCOe33XIv4Y9TxkkzNlTEmlK6rB7Ddg0xYthu6zikFONw&oe=658FC753'); ">
+                    <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
+                        <div class="text-center">
+                            <h1 class="text-3xl font-semibold text-white lg:text-4xl">Look for your new <span class="text-blue-400">Career</span> Path</h1>
+                            <button class="w-full px-5 py-2 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">Start career</button>
+                        </div>
+                    </div>
+                </div>
+
+            </header>
+
+
+
+
         </div>
+
+
+
         <script src="{{ asset('vendor/bladewind/js/helpers.js') }}" type="text/javascript"></script>
     </body>
 </html>
