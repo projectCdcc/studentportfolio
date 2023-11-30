@@ -46,5 +46,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/employer/jobs/id={id}', [EmployerJobController::class, 'index'])->name('empJob.show');
     Route::post('/employer/jobs/store/{id}', [EmployerJobController::class, 'store'])->name('empJob.store');
     Route::delete('/employer/{userId}/jobs/{jobId}', [EmployerJobController::class, 'destroy'])->name('employer.job.destroy');
+    Route::post('/employer/jobs/update/id={id}', [EmployerJobController::class, 'update'])->name('employer.job.update');
 });
 

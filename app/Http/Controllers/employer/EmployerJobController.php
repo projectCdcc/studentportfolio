@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Employer;
 use App\Http\Requests\JobRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -26,11 +27,6 @@ class EmployerJobController extends Controller
 
         return view('employer.jobs.emp-job')->with('jobs', $jobs);
     }
-
-
-
-
-
 
     
     //create job
@@ -56,6 +52,31 @@ class EmployerJobController extends Controller
             return Redirect::route('empJob.show', $user->id)->with('error', 'profile-is-not-updated');
         } else {
             return Redirect::route('empJob.show', $user->id)->with('success', 'profile-updated');
+        }
+    }
+    
+
+    //update job
+    public function update(JobRequest $request, $id) {
+        $request->validated();
+        $job = Job::where('id', $id)->first();
+        $user = Auth::user()->id;
+
+        $job->update([
+            'title'=>$request->title,
+            'city'=>$request->city,
+            'country'=>$request->country,
+            'job_type'=>$request->type,
+            'category' => $request->category,
+            'description'=>$request->description,
+            'requirement'=>$request->requirement,
+            'how_to'=>$request->apply,
+        ]);
+
+        if(!$job) {
+            return Redirect::route('empJob.show', $user)->with('error', 'job-is-not-updated');
+        } else {
+            return Redirect::route('empJob.show', $user)->with('success', 'job-updated');
         }
     }
 
