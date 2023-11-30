@@ -39,7 +39,7 @@
                             <!-- Dashboard -->
                         @auth
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                <x-nav-link :href="Auth::check() ? (Auth::user()->role == 'student' ? route('dashboard') : route('employer.dashboard')) : null" :active="request()->routeIs('dashboard')">
                                     {{ __('Dashboard') }}
                                 </x-nav-link>
                             </div>
@@ -52,7 +52,61 @@
                             </div>
                         </div>
 
+                    @if(auth()->check())
+                         <!-- Settings Dropdown -->
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
 
+
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+
+                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                <!-- Smaller Avatar Image -->
+                                <img class="w-8 h-8 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mr-1" src="/avatars/{{Auth::user()->avatar}}" alt="Bordered avatar">
+
+
+                            <div>{{ Auth::user()->username }}</div>
+
+                                <div class="ml-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </x-slot>
+
+                        <x-slot name="content">
+
+                            <x-dropdown-link :href="route('empProfile.detail')">
+                                {{ __('View Profile') }}
+                            </x-dropdown-link>
+
+                            @if ( Auth::user()->type === 'student')
+                                <x-dropdown-link :href="route('profile.edit')">
+                                    {{ __('Edit Profile') }}
+                                </x-dropdown-link>
+                            @else
+                                <x-dropdown-link :href="route('empProfile.edit', $id=Auth::user()->id)">
+                                    {{ __('Edit Profile') }}
+                                </x-dropdown-link>
+                            @endif
+
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-dropdown-link :href="route('logout')"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
+                    </div>
+
+                    @else
                         <!-- Right menu -->
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
 
@@ -91,7 +145,7 @@
                                 </x-slot>
                             </x-dropdown>
                         </div>
-
+                    @endif
 
 
                         <!-- Hamburger -->
@@ -105,7 +159,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
@@ -152,28 +205,54 @@
                 </div>
             </nav>
 
-
             <!-- Hero Section  -->
+            @if(auth()->check())
+                @if (Auth::user()->role== 'student')
+                <header class="bg-white dark:bg-gray-900">
+                    <div class="w-full bg-center bg-cover h-screen" style="background-image: url('https://scontent.fbkk5-5.fna.fbcdn.net/v/t1.6435-9/175354535_411903079885079_3092647609897957512_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=dd63ad&_nc_eui2=AeGqluCmPx8B_EIPcqMpqHPLSw4hVNZSUfxLDiFU1lJR_Hl721Rx-B_KQqgG2BGk4obLGjGyvLNWJ1qMXBjPVBTp&_nc_ohc=xVxzuhs_mEkAX-Lwwk3&_nc_ht=scontent.fbkk5-5.fna&oh=00_AfCOe33XIv4Y9TxkkzNlTEmlK6rB7Ddg0xYthu6zikFONw&oe=658FC753');  height: 91vh; overflow: hidden;">
+                        <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
+                            <div class="text-center">
+                                <h1 class="text-3xl font-semibold text-white lg:text-4xl">"Craft your <span class="text-blue-400">Career</span> with purpose and passion"</h1>
+                                <br>
+                                <p class="text-3xl font-thin text-white font-mono">Welcome</p>
+                            </div>
+                        </div>
+                    </div>
+                </header>
 
+                @else 
+                <header class="bg-white dark:bg-gray-900">
+                    <div class="w-full bg-center bg-cover h-screen" style="background-image: url('https://scontent.fbkk5-5.fna.fbcdn.net/v/t1.6435-9/175354535_411903079885079_3092647609897957512_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=dd63ad&_nc_eui2=AeGqluCmPx8B_EIPcqMpqHPLSw4hVNZSUfxLDiFU1lJR_Hl721Rx-B_KQqgG2BGk4obLGjGyvLNWJ1qMXBjPVBTp&_nc_ohc=xVxzuhs_mEkAX-Lwwk3&_nc_ht=scontent.fbkk5-5.fna&oh=00_AfCOe33XIv4Y9TxkkzNlTEmlK6rB7Ddg0xYthu6zikFONw&oe=658FC753');  height: 91vh; overflow: hidden;">
+                        <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
+                            <div class="text-center">
+                                <h1 class="text-3xl font-semibold text-white lg:text-4xl">"Find <span class="text-blue-400">Talent</span>, Build Success"</h1>
+                                <br>
+                                <p class="text-3xl font-thin text-white font-mono">Welcome</p>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            
+
+                @endif
+            @else 
             <header class="bg-white dark:bg-gray-900">
-
-                <div class="w-full bg-center bg-cover h-screen" style="background-image: url('https://scontent.fbkk5-5.fna.fbcdn.net/v/t1.6435-9/175354535_411903079885079_3092647609897957512_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=dd63ad&_nc_eui2=AeGqluCmPx8B_EIPcqMpqHPLSw4hVNZSUfxLDiFU1lJR_Hl721Rx-B_KQqgG2BGk4obLGjGyvLNWJ1qMXBjPVBTp&_nc_ohc=xVxzuhs_mEkAX-Lwwk3&_nc_ht=scontent.fbkk5-5.fna&oh=00_AfCOe33XIv4Y9TxkkzNlTEmlK6rB7Ddg0xYthu6zikFONw&oe=658FC753'); ">
+                <div class="w-full bg-center bg-cover h-screen" style="background-image: url('https://scontent.fbkk5-5.fna.fbcdn.net/v/t1.6435-9/175354535_411903079885079_3092647609897957512_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=dd63ad&_nc_eui2=AeGqluCmPx8B_EIPcqMpqHPLSw4hVNZSUfxLDiFU1lJR_Hl721Rx-B_KQqgG2BGk4obLGjGyvLNWJ1qMXBjPVBTp&_nc_ohc=xVxzuhs_mEkAX-Lwwk3&_nc_ht=scontent.fbkk5-5.fna&oh=00_AfCOe33XIv4Y9TxkkzNlTEmlK6rB7Ddg0xYthu6zikFONw&oe=658FC753');  height: 91vh; overflow: hidden;">
                     <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
                         <div class="text-center">
-                            <h1 class="text-3xl font-semibold text-white lg:text-4xl">Look for your new <span class="text-blue-400">Career</span> Path</h1>
-                            <button class="w-full px-5 py-2 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">Start career</button>
+                            <h1 class="text-3xl font-semibold text-white lg:text-4xl">Discover your exciting <span class="text-blue-200 border border-white border-4">Career</span> journey ahead</h1>
+                            <a href="{{ route('login') }}">
+                                <br>
+                            <button class="w-full px-5 py-2 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">Search career</button>
+                            </a>
                         </div>
                     </div>
                 </div>
-
             </header>
-
-
-
-
         </div>
+        @endif
 
-
+        @include('layouts.footer')
 
         <script src="{{ asset('vendor/bladewind/js/helpers.js') }}" type="text/javascript"></script>
     </body>

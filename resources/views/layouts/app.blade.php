@@ -46,14 +46,13 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="py-8">
                 @yield('content')
                 {{ $slot }}
             </main>
+
+            @include('layouts.footer')
         </div>
-
-
-
 
     </body>
 </html>

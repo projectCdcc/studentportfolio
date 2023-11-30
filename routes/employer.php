@@ -5,6 +5,7 @@ use App\Http\Controllers\Employer\EmployerRegisterController;
 use App\Http\Controllers\Employer\TransferUsersToEmployers;
 use App\Http\Controllers\Employer\EmployerJobController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Employer\JobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +54,6 @@ Route::middleware('auth')->group(function () {
 
 /***************** Stand alone route */
 
-Route::get('/employer/job/list', [EmployerJobController::class, 'jobList'])->name('employer.job.list');
+
+Route::get('/job/list', [JobController::class, 'jobList'])->name('employer.job.list');
+Route::get('/job/detail/id={id}', [JobController::class, 'jobDetail'])->name('employer.job.detail');

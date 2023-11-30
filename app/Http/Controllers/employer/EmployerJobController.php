@@ -55,16 +55,7 @@ class EmployerJobController extends Controller
         }
     }
 
-    // lists of Jobs
-    public function jobList()
-        {
-            // Retrieve all jobs from the jobs table as a collection
-            $jobs = Job::all();
-
-            // Return the collection of jobs
-            return view('employer.jobs.emp-job-list')->with('jobs', $jobs);
-        }
-
+  
 
     //update job
     public function update(JobRequest $request, $id) {
