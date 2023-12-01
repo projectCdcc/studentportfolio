@@ -36,34 +36,24 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = Auth::user(); // Retrieve the authenticated user
-
+        
         if ($user->type == 'student') {
             // Redirect to the home route for students
-
-             // Alert logic
-        if (!session()->has('alert_shown')) {
-            session(['alert_shown' => true]);
-            return redirect()->intended('dashboard');
+            $redirectPath = 'dashboard';
         } else {
-            return redirect()->intended('dashboard');
-        }
-
-        } else {
-            
+            // Redirect to the employer route for employer
             $employer = Employer::where('organization_name', $user->username)->first();
             session(['avatar' => $employer->avatar]);
-
-            if (!session()->has('alert_shown')) {
-                session(['alert_shown' => true]);
-                return redirect()->intended('employer.dashboard');
-            } else {
-                return redirect()->intended('employer.dashboard');
-            }
-
-
-            // Redirect to the employer route for other roles
-
+            $redirectPath = 'employer.dashboard';
         }
+        
+        // Alert logic
+        if (!session()->has('alert_shown')) {
+            session(['alert_shown' => true]);
+        }
+        
+        return redirect()->intended($redirectPath);
+        
 
 
     }

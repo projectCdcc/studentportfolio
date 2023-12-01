@@ -17,18 +17,8 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', 'max:255'],
-            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-            'avatar' => ['image', 'mimes:jpeg,png,jpg,g if', 'max:2048'], // Rules for avatar upload
-
-            // org details 
-            'org_type' => 'string|max:255',
-            'street' => 'string|max:255',
-            'city' => 'string|max:255',
-            'country' => 'string|max:255',
-            'establish_year' => 'string|max:255',
-            'about' => 'nullable|string',
-            
+            'username' => ['string', 'max:255', Rule::unique(User::class)->ignore($this->user->id)], 
+            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user->id)],
         ];
     }
 

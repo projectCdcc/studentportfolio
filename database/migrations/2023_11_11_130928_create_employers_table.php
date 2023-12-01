@@ -22,7 +22,10 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('establish_year')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('website')->nullable();
             $table->text('about')->nullable();
+            $table->foreignId('user_id')->constrained('users', 'id')->onDelete('cascade'); // Add onDelete if you want to cascade delete
             $table->timestamps();
         });
     }

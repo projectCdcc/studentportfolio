@@ -24,7 +24,6 @@ class EmployerJobController extends Controller
 
         $jobs = Job::where('company', $employer->organization_name)->paginate(10);
 
-
         return view('employer.jobs.emp-job')->with('jobs', $jobs);
     }
 

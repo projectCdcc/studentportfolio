@@ -36,8 +36,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('empRegister', [EmployerRegisterController::class, 'create'])->name('empRegister.view');
-    Route::post('empRegister', [EmployerRegisterController::class, 'store'])->name('empRegister.store');
+    Route::get('employer/register', [EmployerRegisterController::class, 'create'])->name('empRegister.view');
+    Route::post('/employer/register', [EmployerRegisterController::class, 'store'])->name('empRegister.store');
 });
 
 

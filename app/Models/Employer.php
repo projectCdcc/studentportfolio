@@ -23,5 +23,14 @@ class Employer extends Model
         'establish_year',
         'country',
         'about',
+        'phone',
+        'website',
+        'user_id',
     ];
+
+    // relationship
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

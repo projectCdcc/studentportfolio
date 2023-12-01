@@ -34,7 +34,7 @@ class EmployerRegisterController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'username' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255','unique:'.User::class],
             'email' => ['required', 'string', 'email', 'max:255', 'email:rfc,dns', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -46,9 +46,11 @@ class EmployerRegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+
         $employer = Employer::create([
             'organization_name' => $request->username,
             'email' => $request->email,
+            'user_id'=> $user->id,
         ]);
 
 

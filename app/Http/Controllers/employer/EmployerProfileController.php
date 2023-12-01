@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\EmployerRequest;
+use App\Http\Requests\AvatarRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Employer;
 use App\Models\User;
+use App\Models\Job;
 use Illuminate\Support\Facades\File; 
 
 
@@ -22,8 +25,13 @@ class EmployerProfileController extends Controller
 
     public function edit(Request $request): View
     {
+        // retrieve employer info
+        $user = $request->user();
+        
+        $employer = Employer::where('organization_name', $user->username)->first();
+
         return view('employer.empedit', [
-            'user' => $request->user(),
+            'user' => $request->user(), 'employer'=>$employer,
         ]);
     }
 
@@ -32,15 +40,44 @@ class EmployerProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {   
-        dd($request->all());
+        
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        // Retrieve the authenticated user
+        $user = $request->user();
+        
+        // check if the user exist
+        $check = User::where('id', $user->id)->first();
 
+        // match the user == employer based on username == organization_name
+        $employer = Employer::where('organization_name', $check->username)->first();
+
+        $job = Job::where('company', $check->username)->get();
+      
+        // dd($employer->organization_name);
+            
+        if ($employer) {
+            $employer->update([
+                'organization_name' => $user->username,
+                'email' => $request->email,
+            ]);
+
+             // Loop through each job and update the 'company' column
+            foreach ($job as $data) {
+                $data->update([
+                    'company' => $user->username,
+                ]);
+            }
+
+            $userUpdated = $request->user()->save();
+
+        }
+       
+        
         return Redirect::route('empProfile.edit')->with('status', 'profile-updated');
     }
 
@@ -49,7 +86,7 @@ class EmployerProfileController extends Controller
      * 
      */
 
-    public function avatarUpdate(ProfileUpdateRequest $request, $id): RedirectResponse {
+    public function avatarUpdate(AvatarRequest $request, $id): RedirectResponse {
         /**
          * Validated the array values of inputs. 
          * 
@@ -126,7 +163,7 @@ class EmployerProfileController extends Controller
      * 
      */
 
-    public function orgUpdate(ProfileUpdateRequest $request): RedirectResponse {
+    public function orgUpdate(EmployerRequest $request): RedirectResponse {
          // Retrieve the authenticated user
          $user = $request->user();
 
@@ -135,7 +172,8 @@ class EmployerProfileController extends Controller
  
          // Update employer-specific information
          $employer = Employer::where('organization_name', $user->username)->first();
- 
+
+         dd($employer);
          // Check if the employer exists
          if ($employer) {
              // Update employer-specific fields
@@ -145,8 +183,9 @@ class EmployerProfileController extends Controller
                  'city' => $request->input('city'),
                  'country' => $request->input('country'),
                  'establish_year' => $request->input('establish_year'),
+                 'phone'=>$request->input('phone'),
+                 'website'=>$request->input('website'),
                  'about' => $request->input('about'),
-                 
              ]);
          }
  
@@ -167,7 +206,7 @@ class EmployerProfileController extends Controller
          // Retrieve the authenticated user
          $user = $request->user();
 
-        // Update employer-specific information
+        // employer-specific information
         $employer = Employer::where('organization_name', $user->username)->first();
 
         return view('employer.emp-profile-detail', [
@@ -175,20 +214,31 @@ class EmployerProfileController extends Controller
         ]);
     }
 
-
-
-
-
     /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse
     {
+
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current-password'],
         ]);
 
-        $user = $request->user();
+        $user = Auth::user();
+        $avatarFilename = $user->avatar;
+    
+        // If avatar filename is present, construct the full path and delete the file
+        if ($avatarFilename) {
+            $existingAvatarPath = public_path('avatars') . '/' .$avatarFilename;
+    
+            // Delete the avatar file if it exists
+            if (File::exists($existingAvatarPath)) {
+                File::delete($existingAvatarPath);
+            }
+        }
+
+        // Delete associated employer data
+        $user->employers()->delete();
 
         Auth::logout();
 
