@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/employer/profile', [EmployerProfileController::class, 'update'])->name('empProfile.update');
     Route::patch('/employer/avatarupdate/{id}', [EmployerProfileController::class, 'avatarUpdate'])->name('empAvatar.update');
     Route::patch('/employer/organization/update', [EmployerProfileController::class, 'orgUpdate'])->name('orgDetail.update');
-    Route::delete('/employer/profile', [EmployerProfileController::class, 'destroy'])->name('empProfile.destroy');
+    Route::delete('/employer/profile/destroy/', [EmployerProfileController::class, 'destroy'])->name('empProfile.destroy');
     Route::get('/employer/profile/detail', [EmployerProfileController::class, 'viewDetail'])->name('empProfile.detail');
 });
 

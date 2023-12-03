@@ -35,8 +35,6 @@ class JobRequest extends FormRequest
             'description' => 'string',
             'requirement' => 'string',
             'apply'=>'string',
-
-            
         ];
     }
 }

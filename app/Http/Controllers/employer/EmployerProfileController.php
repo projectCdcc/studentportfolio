@@ -14,7 +14,8 @@ use Illuminate\View\View;
 use App\Models\Employer;
 use App\Models\User;
 use App\Models\Job;
-use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage; 
 
 
 class EmployerProfileController extends Controller
@@ -224,9 +225,10 @@ class EmployerProfileController extends Controller
             'password' => ['required', 'current-password'],
         ]);
 
-        $user = Auth::user();
+        $user = $request->user();
         $avatarFilename = $user->avatar;
-    
+        
+        // dd($avatarFilename);
         // If avatar filename is present, construct the full path and delete the file
         if ($avatarFilename) {
             $existingAvatarPath = public_path('avatars') . '/' .$avatarFilename;
@@ -236,9 +238,6 @@ class EmployerProfileController extends Controller
                 File::delete($existingAvatarPath);
             }
         }
-
-        // Delete associated employer data
-        $user->employers()->delete();
 
         Auth::logout();
 

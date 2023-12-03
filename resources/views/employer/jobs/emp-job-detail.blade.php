@@ -13,7 +13,7 @@
         
         <hr class="my-4">
 
-        <div class="grid grid-cols-5 gap-4 mb-4 mx-auto w-full max-w-screen-lg">
+        <div class="grid grid-cols-4 gap-4 mb-4 mx-auto w-full max-w-screen-lg">
             <div>
                 <h2 class="text-l font-base mb-2 font-montserrat">Location:  </h2>
                 <p class="text-gray-400 text-sm font-montserrat">{{ $job->city }}, {{ $job->country }}</p>
