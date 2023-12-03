@@ -46,16 +46,9 @@ class AuthenticatedSessionController extends Controller
             session(['avatar' => $employer->avatar]);
             $redirectPath = 'employer.dashboard';
         }
-        
-        // Alert logic
-        if (!session()->has('alert_shown')) {
-            session(['alert_shown' => true]);
-        }
-        
+                
         return redirect()->intended($redirectPath);
         
-
-
     }
 
     /**
