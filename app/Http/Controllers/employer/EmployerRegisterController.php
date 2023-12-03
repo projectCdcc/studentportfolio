@@ -46,11 +46,12 @@ class EmployerRegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $userId = $user->id;
 
         $employer = Employer::create([
             'organization_name' => $request->username,
             'email' => $request->email,
-            'user_id'=> $user->id,
+            'user_id'=> $userId,
         ]);
 
 

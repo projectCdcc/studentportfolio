@@ -113,9 +113,9 @@
                 </div>
                 <input :value="old('phone', $employer->phone)" type="text" name="phone" id="phone-input" aria-describedby="helper-text-explanation" class="mt-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="063-001-7890" required>
             </div>
-            <p id="helper-text-explanation" class="mt-2 text-xs text-gray-500 dark:text-gray-400">Select a phone number that matches the format.</p>
-            <x-input-error class="mt-2" :messages="$errors->get('org_type')" />
-        </div>
+                <p id="helper-text-explanation" class="mt-2 text-xs text-gray-500 dark:text-gray-400">Select a phone number that matches the format.</p>
+                <x-input-error class="mt-2" :messages="$errors->get('org_type')" />
+            </div>
 
         <div>
             <x-input-label for="org_type" :value="__('WebSite:')" />
@@ -126,16 +126,11 @@
     </div>
 
 
-
-
-
-
     <div class="mt-4">
         <x-input-label for="about" :value="__('About')" />
         <textarea id="about" name="about" rows="4" class="mt-1 block w-full text-l text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{ $employer->about }}"></textarea>
         <x-input-error class="mt-2" :messages="$errors->get('about')" />
     </div>
-
 
 
         <div class="flex items-center gap-4">

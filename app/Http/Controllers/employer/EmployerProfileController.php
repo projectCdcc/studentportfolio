@@ -153,9 +153,6 @@ class EmployerProfileController extends Controller
         } else {
             return Redirect::route('empProfile.edit')->with('upload', 'Profile not updated!');
         }
-
-        
-
     }
 
 
@@ -165,30 +162,27 @@ class EmployerProfileController extends Controller
      */
 
     public function orgUpdate(EmployerRequest $request): RedirectResponse {
-         // Retrieve the authenticated user
-         $user = $request->user();
+        // Retrieve the authenticated user
+        $user = $request->user();
+        
+      
+        // Use the relationship to get the associated employer
+        $employer = $user->employer;
 
-         // Fill the user model with validated data
-         $user->fill($request->validated());
- 
-         // Update employer-specific information
-         $employer = Employer::where('organization_name', $user->username)->first();
-
-         dd($employer);
-         // Check if the employer exists
-         if ($employer) {
-             // Update employer-specific fields
-             $employer->update([
-                 'org_type' => $request->input('org_type'),
-                 'street' => $request->input('street'),
-                 'city' => $request->input('city'),
-                 'country' => $request->input('country'),
-                 'establish_year' => $request->input('establish_year'),
-                 'phone'=>$request->input('phone'),
-                 'website'=>$request->input('website'),
-                 'about' => $request->input('about'),
-             ]);
-         }
+        // Check if the employer exists
+        if ($employer) {
+            // Update employer-specific fields
+            $employer->update([
+                'org_type' => $request->input('org_type'),
+                'street' => $request->input('street'),
+                'city' => $request->input('city'),
+                'country' => $request->input('country'),
+                'establish_year' => $request->input('establish_year'),
+                'phone' => $request->input('phone'),
+                'website' => $request->input('website'),
+                'about' => $request->input('about'),
+            ]);
+        }
  
          // Redirect back to the profile edit page with a success message
          return redirect()->route('empProfile.edit')->with('update', 'Profile updated successfully.');
@@ -205,7 +199,7 @@ class EmployerProfileController extends Controller
     public function viewDetail(Request $request): view {
 
          // Retrieve the authenticated user
-         $user = $request->user();
+        $user = $request->user();
 
         // employer-specific information
         $employer = Employer::where('organization_name', $user->username)->first();
@@ -238,6 +232,15 @@ class EmployerProfileController extends Controller
                 File::delete($existingAvatarPath);
             }
         }
+
+        // Check all the jobs that is pased by the authorized user.
+        $job = Job::where('company', $user->username)->get();
+
+        // Delete jobs 
+        foreach ($job as $data) {
+            $data->delete();
+        }
+            
 
         Auth::logout();
 

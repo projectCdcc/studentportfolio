@@ -73,6 +73,7 @@
 
                                                         <button type="button" data-modal-target="updateJobModal"
                                                             data-modal-toggle="updateJobModal"
+                                                            data-jobid="{{ $job->id }}"
                                                             data-title="{{ $job->title }}"
                                                             data-city="{{ $job->city }}"
                                                             data-country="{{ $job->country }}"
@@ -344,40 +345,69 @@
                     </div>
                 </div>
             </div>
-
-             <!-- jQuery script -->
+    
+    @isset($job)
+    <!-- Update script  -->
     <script>
+        var jobId;
+
         $(document).ready(function () {
-            var previewButtons = document.querySelectorAll('[data-modal-target="updateJobModal"]');
+        var previewButtons = document.querySelectorAll('[data-modal-target="updateJobModal"]');
 
-            previewButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var jobTitle = button.getAttribute('data-title');
-                    var city = button.getAttribute('data-city');
-                    var country = button.getAttribute('data-country');
-                    var company = button.getAttribute('data-company');
-                    var description = button.getAttribute('data-description');
-                    var category = button.getAttribute('data-category');
-                    var jobType = button.getAttribute('data-job-type');
-                    var requirement = button.getAttribute('data-requirement');
-                    var howTo = button.getAttribute('data-how-to');
+        previewButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+            jobId = button.getAttribute('data-jobid');
+            var jobTitle = button.getAttribute('data-title');
+            var city = button.getAttribute('data-city');
+            var country = button.getAttribute('data-country');
+            var company = button.getAttribute('data-company');
+            var description = button.getAttribute('data-description');
+            var category = button.getAttribute('data-category');
+            var jobType = button.getAttribute('data-job-type');
+            var requirement = button.getAttribute('data-requirement');
+            var howTo = button.getAttribute('data-how-to');
 
-                        // Set the modal form placeholders dynamically
-                    $('#updateJobModal #jobTitleInput').val(jobTitle);
-                    $('#updateJobModal #cityInput').val(city);
-                    $('#updateJobModal #countryInput').val(country);
-                    $('#updateJobModal #companyInput').val(company);
-                    $('#updateJobModal #descriptionInput').val(description);
-                    $('#updateJobModal #categoryInput').val(category);
-                    $('#updateJobModal #jobTypeInput').val(jobType);
-                    $('#updateJobModal #requirementInput').val(requirement);
-                    $('#updateJobModal #howToInput').val(howTo);
-                   
-                });
+            // Set the modal form placeholders dynamically
+            $('#updateJobModal #jobTitleInput').val(jobTitle);
+            $('#updateJobModal #cityInput').val(city);
+            $('#updateJobModal #countryInput').val(country);
+            $('#updateJobModal #companyInput').val(company);
+            $('#updateJobModal #descriptionInput').val(description);
+            $('#updateJobModal #categoryInput').val(category);
+            $('#updateJobModal #jobTypeInput').val(jobType);
+            $('#updateJobModal #requirementInput').val(requirement);
+            $('#updateJobModal #howToInput').val(howTo);
+
+            // Update form action
+            var formAction = "{{ route('employer.job.update', ['id' => ':jobId']) }}";
+            formAction = formAction.replace(':jobId', jobId);
+            $('#updateForm').attr('action', formAction);
             });
         });
-    </script>
+        });
 
+        $(document).ready(function () {
+        // Add confirmation before submitting the form
+        $('#updateForm').submit(function (event) {
+            event.preventDefault(); // Prevent the form from submitting initially
+
+            // Show Tailwind CSS confirmation modal
+            $('#confirmationModal').removeClass('hidden');
+
+            // Handle confirmation and form submission
+            $('#confirmBtn').click(function () {
+            $('#updateForm').off('submit').submit(); // Unbind previous submit event and submit the form
+            $('#confirmationModal').addClass('hidden'); // Hide the confirmation modal
+            });
+
+            // Handle cancel button click
+            $('#cancelBtn').click(function () {
+            $('#confirmationModal').addClass('hidden'); // Hide the confirmation modal
+            });
+        });
+        });
+    </script>
+        @endisset
 
             <!-- Update modal -->
             <div id="updateJobModal" tabindex="-1" aria-hidden="true"
@@ -403,8 +433,6 @@
                                 <span class="sr-only">Close modal</span>
                             </button>
                         </div>
-
-
 
                         <!-- Modal body -->
                         <form id="updateForm" method="post">
@@ -507,44 +535,6 @@
                             </div>
                         </form>
 
-
-
-                        <!-- Update Script -->
-                        @isset($job)
-                        <script>
-                            $(document).ready(function () {
-                                // Set the initial form action
-                                var formAction =
-                                    "{{ route('employer.job.update', ['id' => $job->id]) }}";
-                                $('#updateForm').attr('action', formAction);
-
-                                // Add confirmation before submitting the form
-                                $('#updateForm').submit(function (event) {
-                                    event
-                                .preventDefault(); // Prevent the form from submitting initially
-
-                                    // Show Tailwind CSS confirmation modal
-                                    $('#confirmationModal').removeClass('hidden');
-
-                                    // Handle confirmation and form submission
-                                    $('#confirmBtn').click(function () {
-                                        $('#updateForm').off('submit')
-                                    .submit(); // Unbind previous submit event and submit the form
-                                        $('#confirmationModal').addClass(
-                                        'hidden'); // Hide the confirmation modal
-                                    });
-
-                                    // Handle cancel button click
-                                    $('#cancelBtn').click(function () {
-                                        $('#confirmationModal').addClass(
-                                        'hidden'); // Hide the confirmation modal
-                                    });
-                                });
-                            });
-                        </script>
-
-                        @endisset
-
                         <!-- Confirmation model  -->
 
                         <div id="confirmationModal" tabindex="-1"
@@ -625,7 +615,7 @@
             });
         });
 
-        var job = 1;
+        
         var detailsRoute = "{{ route('employer.job.detail', ['id' => ':id']) }}";
            
         function redirectToJobDetail() {
@@ -698,13 +688,14 @@
 
                     </dl>
                     
+                    @isset($job)
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-3 sm:space-x-4">
                         <button type="button" onclick="redirectToJobDetail('{{ route('employer.job.detail', [$id=$job->id]) }}')"
                                 class="flex items-center justify-center inline-flex items-center px-4 py-2 text-sm font-medium text-center bg-purple-900 text-white rounded-lg hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View Details</button>
                         </div>
                     </div>
-                   
+                   @endisset
                 </div>
             </div>
         </div>

@@ -25,17 +25,15 @@ class EmployerRequest extends FormRequest
     public function rules()
     {
         return [
-            
             // org details 
             'org_type' => 'string|max:255',
             'street' => 'string|max:255',
             'city' => 'string|max:255',
             'country' => 'string|max:255',
             'establish_year' => 'string|max:255',
-            'phone'=> 'numeric|min:10',
+            'phone' => 'string|regex:/^\d{3}-\d{3}-\d{4}$/',
             'website'=> 'string|max:255',
             'about' => 'nullable|string',
-            
         ];
     }
 }
