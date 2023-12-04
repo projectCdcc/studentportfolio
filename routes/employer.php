@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/employer/job/store/{id}', [EmployerJobController::class, 'store'])->name('empJob.store');
     Route::delete('/employer/{userId}/job/{jobId}', [EmployerJobController::class, 'destroy'])->name('employer.job.destroy');
     Route::post('/employer/job/update/id={id}', [EmployerJobController::class, 'update'])->name('employer.job.update');
+    Route::get('/job/detail/id={id}', [JobController::class, 'jobDetail'])->name('employer.job.detail');
 });
 
 
@@ -56,4 +57,3 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/job/list', [JobController::class, 'jobList'])->name('employer.job.list');
-Route::get('/job/detail/id={id}', [JobController::class, 'jobDetail'])->name('employer.job.detail');
