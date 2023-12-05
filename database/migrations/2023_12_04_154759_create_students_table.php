@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('email');
             $table->timestamp('graduate_date')->nullable();;
-            $table->text('about_me');
+            $table->text('about_me')->nullable();
             $table->timestamps();
         });
     }

@@ -8,7 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-
+    
+    
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'username',
+        'email',
+        'graduate_date',
+        'about_me',
+        'user_id',
+    ];
 
 
     // Database table relationship 

@@ -50,6 +50,12 @@ class User extends Authenticatable
         return $this->type === 'employer';
     }
 
+    public function isStudent()
+    {
+        return $this->type === 'student';
+    }
+
+
     public function employer()
     {
         return $this->hasOne(Employer::class, 'user_id');

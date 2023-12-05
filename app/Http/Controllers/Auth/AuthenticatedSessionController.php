@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use App\Models\Employer;
+use App\Models\Student;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -20,9 +21,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-
-        Redirect::setIntendedUrl(url()->route('dashboard'));
-        Redirect::setIntendedUrl(url()->route('employer.dashboard'));
         return view('auth.login');
     }
 
@@ -35,17 +33,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $user = Auth::user(); // Retrieve the authenticated user
+        $user = $request->user(); // Retrieve the authenticated user
         
-        if ($user->type == 'student') {
-            // Redirect to the home route for students
-            $redirectPath = 'dashboard';
-        } else {
-            // Redirect to the employer route for employer
-            $employer = Employer::where('organization_name', $user->username)->first();
+        $redirectPath = $user->type == 'student' ? route('student.dashboard') : route('employer.dashboard');
+        
+        if ($user->type == 'employer') {
+            $employer = Employer::where('user_id', $user->id)->first();
             session(['avatar' => $employer->avatar]);
-            $redirectPath = 'employer.dashboard';
         }
+        
                 
         return redirect()->intended($redirectPath);
         

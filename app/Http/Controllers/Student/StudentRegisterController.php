@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Student;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
-class RegisteredUserController extends Controller
+class StudentRegisterController extends Controller
 {
     /**
      * Display the registration view.
      */
     public function create(): View
-    {
+    {   
 
         Redirect::setIntendedUrl(url()->route('student.dashboard'));
-        Redirect::setIntendedUrl(url()->route('employer.dashboard'));
-        return view('auth.register');
+        return view('student.student-register');
     }
 
     /**
@@ -41,16 +41,33 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = User::create([
-            'username' => $request->name,
+            'username' => $request->username,
             'type' => 'student',
             'email' => $request->email,
             'password' => Hash::make($request->password),
+        ]);
+
+        $userId = $user->id;
+
+        $employer = Student::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'user_id'=> $userId,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        
+        if (!session()->has('alert_shown')) {
+            session(['alert_shown' => true]);
+            return redirect()->intended('student.dashboard');
+        } else {
+            return redirect()->intended('student.dashboard');
+        }
+
+
+        // Redirect to the employer route for other roles
     }
 }

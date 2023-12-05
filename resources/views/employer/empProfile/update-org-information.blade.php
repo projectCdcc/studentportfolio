@@ -97,7 +97,7 @@
 
     <div class="mt-4">
         <x-input-label for="country" :value="__('Established in')" />
-        <x-text-input id="country" name="establish_year" type="text" class="mt-1 block w-full text-gray-400" :value="old('country', $employer->establish_year)" required autofocus autocomplete="country" />
+        <x-text-input id="country" name="establish_year" type="text" class="mt-1 block w-full text-gray-400" :value="old('date', $employer->establish_year)" required autofocus autocomplete="country" />
         <x-input-error class="mt-2" :messages="$errors->get('country')" />
     </div>
 

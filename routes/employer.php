@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('employer/register', [EmployerRegisterController::class, 'create'])->name('empRegister.view');
+    Route::get('/employer/register', [EmployerRegisterController::class, 'create'])->name('empRegister.view');
     Route::post('/employer/register', [EmployerRegisterController::class, 'store'])->name('empRegister.store');
 });
 
@@ -56,4 +56,4 @@ Route::middleware('auth')->group(function () {
 /***************** Stand alone route */
 
 
-Route::get('/job/list', [JobController::class, 'jobList'])->name('employer.job.list');
+Route::get('/job/list', [JobController::class, 'jobList'])->name('job.list');

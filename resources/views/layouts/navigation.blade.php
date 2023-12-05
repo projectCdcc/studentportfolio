@@ -14,29 +14,24 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 @auth
-                    @if (Auth::user()->role == 'student')
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="Auth::check() ? (Auth::user()->type == 'student' ? route('student.dashboard') : route('employer.dashboard')) : null" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
-                    @else
-                        <x-nav-link :href="route('employer.dashboard')" :active="request()->routeIs('employer.dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                    @endif
+                    </div>
                 @endauth
-
-                    <x-nav-link :href="route('employer.job.list')" :active="request()->routeIs('employer.job.list')">
+                    <x-nav-link :href="route('job.list')" :active="request()->routeIs('employer.job.list')">
                         {{ __('Jobs List') }}
                     </x-nav-link>
 
                     @auth
-                        @if (Auth::user()->role== 'student')
-                        <x-nav-link :href="route('employer.dashboard')" :active="request()->routeIs('dashboard')">
+                        @if (Auth::user()->type == 'student')
+                        <x-nav-link :href="route('employer.dashboard')" :active="request()->routeIs('dashboard')" >
                             {{ __('Employers') }}
                         </x-nav-link>
 
                         @else
-                        <x-nav-link :href="route('employer.dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('student.dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Students') }}
                         </x-nav-link>
 
@@ -74,7 +69,7 @@
 
                         <x-slot name="content">
                             <!-- Student-->
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('student.register.view')">
                                 {{ __('Student') }}
                             </x-dropdown-link>
 
@@ -112,12 +107,12 @@
 
                     <x-slot name="content">
 
-                        <x-dropdown-link :href="route('empProfile.detail')">
-                            {{ __('View Profile') }}
-                        </x-dropdown-link>
+                    <x-dropdown-link :href="auth()->user()->type == 'student' ? route('student.profile.detail') : route('empProfile.detail')">
+                        {{ __('View Profile') }}
+                    </x-dropdown-link>
 
                         @if ( Auth::user()->type === 'student')
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('student.profile.edit', $id=Auth::user()->id)">
                                 {{ __('Edit Profile') }}
                             </x-dropdown-link>
                         @else
@@ -157,11 +152,12 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('student.dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
 
+        
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
@@ -170,9 +166,15 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+                @if ( Auth::user()->type === 'student')
+                    <x-dropdown-link :href="route('student.profile.edit')">
+                        {{ __('Edit Profile') }}
+                    </x-dropdown-link>
+                @else
+                    <x-dropdown-link :href="route('empProfile.edit', $id=Auth::user()->id)">
+                        {{ __('Edit Profile') }}
+                    </x-dropdown-link>
+                @endif
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
