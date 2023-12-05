@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.css" rel="stylesheet" />
 
@@ -222,7 +222,7 @@
             @if(auth()->check())
                 @if (Auth::user()->type== 'student')
                 <header class="bg-white dark:bg-gray-900">
-                    <div class="w-full bg-center bg-cover h-screen" style="background-image: url('https://scontent.fbkk5-5.fna.fbcdn.net/v/t1.6435-9/175354535_411903079885079_3092647609897957512_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=dd63ad&_nc_eui2=AeGqluCmPx8B_EIPcqMpqHPLSw4hVNZSUfxLDiFU1lJR_Hl721Rx-B_KQqgG2BGk4obLGjGyvLNWJ1qMXBjPVBTp&_nc_ohc=xVxzuhs_mEkAX-Lwwk3&_nc_ht=scontent.fbkk5-5.fna&oh=00_AfCOe33XIv4Y9TxkkzNlTEmlK6rB7Ddg0xYthu6zikFONw&oe=658FC753');  height: 91vh; overflow: hidden;">
+                    <div class="w-full bg-center bg-cover h-screen" style="background-image: url('{{ asset('images/aiu-road.jpg') }}');  height: 91vh; overflow: hidden;">
                         <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
                             <div class="text-center">
                                 <h1 class="text-3xl font-semibold text-white lg:text-4xl">"Craft your <span class="text-blue-400">Career</span> with purpose and passion"</h1>
@@ -233,9 +233,9 @@
                     </div>
                 </header>
 
-                @else 
+                @else
                 <header class="bg-white dark:bg-gray-900">
-                    <div class="w-full bg-center bg-cover h-screen" style="background-image: url('https://scontent.fbkk5-5.fna.fbcdn.net/v/t1.6435-9/175354535_411903079885079_3092647609897957512_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=dd63ad&_nc_eui2=AeGqluCmPx8B_EIPcqMpqHPLSw4hVNZSUfxLDiFU1lJR_Hl721Rx-B_KQqgG2BGk4obLGjGyvLNWJ1qMXBjPVBTp&_nc_ohc=xVxzuhs_mEkAX-Lwwk3&_nc_ht=scontent.fbkk5-5.fna&oh=00_AfCOe33XIv4Y9TxkkzNlTEmlK6rB7Ddg0xYthu6zikFONw&oe=658FC753');  height: 91vh; overflow: hidden;">
+                    <div class="w-full bg-center bg-cover h-screen" style="background-image: url('{{ asset('images/aiu-road.jpg') }}');  height: 91vh; overflow: hidden;">
                         <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
                             <div class="text-center">
                                 <h1 class="text-3xl font-semibold text-white lg:text-4xl">"Find <span class="text-blue-400">Talent</span>, Build Success"</h1>
@@ -245,12 +245,12 @@
                         </div>
                     </div>
                 </header>
-            
+
 
                 @endif
-            @else 
+            @else
             <header class="bg-white dark:bg-gray-900">
-                <div class="w-full bg-center bg-cover h-screen" style="background-image: url('https://scontent.fbkk5-5.fna.fbcdn.net/v/t1.6435-9/175354535_411903079885079_3092647609897957512_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=dd63ad&_nc_eui2=AeGqluCmPx8B_EIPcqMpqHPLSw4hVNZSUfxLDiFU1lJR_Hl721Rx-B_KQqgG2BGk4obLGjGyvLNWJ1qMXBjPVBTp&_nc_ohc=xVxzuhs_mEkAX-Lwwk3&_nc_ht=scontent.fbkk5-5.fna&oh=00_AfCOe33XIv4Y9TxkkzNlTEmlK6rB7Ddg0xYthu6zikFONw&oe=658FC753');  height: 91vh; overflow: hidden;">
+                <div class="w-full bg-center bg-cover h-screen" style="background-image: url('{{ asset('images/aiu-road.jpg') }}');  height: 91vh; overflow: hidden;">
                     <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
                         <div class="text-center">
                             <h1 class="text-3xl font-semibold text-white lg:text-4xl">Discover your exciting <span class="text-blue-200 border border-white border-4">Career</span> journey ahead</h1>
