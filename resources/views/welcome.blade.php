@@ -63,7 +63,8 @@
                         </div>
 
                     @if(auth()->check())
-                         <!-- Settings Dropdown -->
+
+            <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
 
 
@@ -86,16 +87,18 @@
                         </x-slot>
 
                         <x-slot name="content">
-
-                            <x-dropdown-link :href="route('empProfile.detail')">
-                                {{ __('View Profile') }}
-                            </x-dropdown-link>
-
                             @if ( Auth::user()->type === 'student')
+
+                                <x-dropdown-link :href="route('student.profile.detail')">
+                                    {{__('View Profile')}}}
+                                </x-dropdown-link>
                                 <x-dropdown-link :href="route('student.dashboard')">
                                     {{ __('Edit Profile') }}
                                 </x-dropdown-link>
                             @else
+                                <x-dropdown-link :href="route('empProfile.detail')">
+                                    {{ __('View Profile') }}
+                                </x-dropdown-link>
                                 <x-dropdown-link :href="route('empProfile.edit', $id=Auth::user()->id)">
                                     {{ __('Edit Profile') }}
                                 </x-dropdown-link>
@@ -173,48 +176,91 @@
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                    @auth
-                    <x-responsive-nav-link :href="Auth::user()->type === 'student' ? route('student.dashboard') : route('employer.dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-responsive-nav-link>
-                    @endauth
+                        @auth
+                        <x-responsive-nav-link :href="Auth::user()->type === 'student' ? route('student.dashboard') : route('employer.dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-responsive-nav-link>
+                        @endauth
+                        <x-responsive-nav-link :href="route('job.list')" :active="request()->routeIs('job.list')">
+                            {{ __('Job Lists') }}
+                        </x-responsive-nav-link>
+
 
                     </div>
 
+                    @if(!auth()->check())
                     <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+                        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+                            <div class="px-4">
+                                <div class="font-medium text-base text-gray-800 dark:text-gray-200">
+                                    <x-responsive-nav-link :href="route('login')">
+                                        {{ __('Log in') }}
+                                    </x-responsive-nav-link>
+                                </div>
+                                <br>
+                            </div>
 
+                            <div class="px-4">
+                                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ __('Register') }}</div>
+                                <div class="font-medium text-sm text-gray-500">{{ __('Register as a Student or Employer') }}</div>
+                            </div>
 
-                        <div class="px-4">
-                            <div class="font-medium text-base text-gray-800 dark:text-gray-200">
-                                <x-responsive-nav-link :href="route('login')">
-                                    {{ __('Log in') }}
+                            <div class="mt-3 space-y-1">
+                                <!-- Student-->
+                                <x-responsive-nav-link :href="route('student.register.view')">
+                                    {{ __('Student') }}
+                                </x-responsive-nav-link>
+
+                                <x-responsive-nav-link :href="route('empRegister.view')">
+                                    {{ __('Employer') }}
                                 </x-responsive-nav-link>
                             </div>
-                            <br>
                         </div>
+                    @endif
 
+                    @auth
+                    <!-- Responsive Settings Options -->
+                    <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                         <div class="px-4">
-                            <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ __('Register') }}</div>
-                            <div class="font-medium text-sm text-gray-500">{{ __('Register as a Student or Employer') }}</div>
+                            <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->username }}</div>
+                            <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <!-- Student-->
-                            <x-responsive-nav-link :href="route('student.register.view')">
-                                {{ __('Student') }}
-                            </x-responsive-nav-link>
+                            @if ( Auth::user()->type === 'student')
+                                <x-dropdown-link :href="route('student.profile.detail')">
+                                    {{ __('View Profile') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('student.profile.edit')">
+                                    {{ __('Edit Profile') }}
+                                </x-dropdown-link>
+                            @else
+                                <x-dropdown-link :href="route('empProfile.detail')">
+                                    {{ __('View Profile') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('empProfile.edit', $id=Auth::user()->id)">
+                                    {{ __('Edit Profile') }}
+                                </x-dropdown-link>
+                            @endif
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-responsive-nav-link :href="route('logout')">
-                                    {{ __('Employer') }}
+                                <x-responsive-nav-link :href="route('logout')"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{ __('Log Out') }}
                                 </x-responsive-nav-link>
                             </form>
                         </div>
                     </div>
+
+                    @endauth
+
+
+
+
                 </div>
             </nav>
 

@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-        @if(!auth()->check())   
+        @if(!auth()->check())
              <!-- Right menu -->
              <div class="hidden sm:flex sm:items-center sm:ml-6">
 
@@ -155,9 +155,12 @@
             <x-responsive-nav-link :href="route('student.dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('job.list')" :active="request()->routeIs('job.list')">
+                {{ __('Job Lists') }}
+            </x-responsive-nav-link>
         </div>
 
-        
+
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
@@ -168,9 +171,15 @@
             <div class="mt-3 space-y-1">
                 @if ( Auth::user()->type === 'student')
                     <x-dropdown-link :href="route('student.profile.edit')">
+                        {{ __('View Profile') }}
+                    </x-dropdown-link>
+                    <x-dropdown-link :href="route('student.profile.edit')">
                         {{ __('Edit Profile') }}
                     </x-dropdown-link>
                 @else
+                    <x-dropdown-link :href="route('empProfile.detail')">
+                        {{ __('View Profile') }}
+                    </x-dropdown-link>
                     <x-dropdown-link :href="route('empProfile.edit', $id=Auth::user()->id)">
                         {{ __('Edit Profile') }}
                     </x-dropdown-link>
