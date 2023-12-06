@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\StudentProfileController;
+use App\Models\Job;
+use App\Http\Controllers\Employer\JobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +18,21 @@ use App\Http\Controllers\Student\StudentProfileController;
 |
 */
 
+/**
+ *
+ * Landing page route (welcome )
+ */
+
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-
+/**
+ *
+ * Students routes
+ *
+ */
 
 Route::middleware('auth')->group(function () {
     Route::get('/student-profile/edit/', [StudentProfileController::class, 'edit'])->name('student.profile.edit');
@@ -29,13 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/student-profile/detail', [StudentProfileController::class, 'viewDetail'])->name('student.profile.detail');
     Route::patch('/student-avatarupdate/{id}', [StudentProfileController::class, 'avatarUpdate'])->name('student.avatar.update');
     Route::patch('/student-profile/detailupdate', [StudentProfileController::class, 'detailUpdate'])->name('student.detail.update');
-});
 
-/**
- * 
- * Students routes 
- * 
- */
+});
 
  Route::middleware('guest')->group(function () {
     Route::get('/student/register', [StudentRegisterController::class, 'create'])->name('student.register.view');
@@ -43,9 +50,17 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/student/dashboard', function () {
-    return view('student.student-dashboard');
+    $jobs = Job::all();
+    return view('student.student-dashboard')->with('jobs', $jobs);
 })->middleware(['auth', 'verified'])->name('student.dashboard');
 
+/**
+ *
+ * Jobs route
+ */
+Route::middleware('auth')->group(function() {
+    Route::get('/student/job/detail/id={id}', [JobController::class, 'jobDetail'])->name('job.detail');
+});
 
 
 Route::middleware('auth')->group(function () {

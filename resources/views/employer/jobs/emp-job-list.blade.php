@@ -7,8 +7,6 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <h1 class="font-medium text-2xl bg-purple py-2 text-purple-900 uppercase">Opening Jobs</h1>
-
-
             <div class="pb-8 pt-2">
                 @if(count($jobs) > 0)
                         <div class="relative overflow-x-auto">
@@ -39,11 +37,11 @@
 
                                 <tbody>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <th scope="row" 
+                                        <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-wrap dark:text-white border-l border-t w-1/5 overflow-hidden">
                                             <a href="{{ route('employer.job.detail', [$id=$job->id]) }}" class="text-blue-800 hover:underline">{{ $job->title}}</a>
                                         </th>
-                                        
+
                                         <td class="px-6 py-4 border-l border-t w-1/5 uppercase">
                                             {{ $job->company}}
                                         </td>
@@ -63,15 +61,10 @@
                             </table>
                         </div>
 
-            @else
-
-        <h3>No Records found .....</h3>
-
-
-        @endif
-
-    
-    </div>
-    </div>
+                    @else
+                <h3>No Records found .....</h3>
+                @endif
+            </div>
+        </div>
 
 </x-app-layout>

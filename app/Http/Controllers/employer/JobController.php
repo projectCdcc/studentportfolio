@@ -26,7 +26,7 @@ class JobController extends Controller
         // Retrive all jobs from the jobs table as a collection
         $job = Job::where('id', $id)->first();
 
-        $userAvatar = User::where('username', $job->company)->first();
+        $userAvatar = User::where('id', $job->user_id)->first();
 
         $company = Employer::where('organization_name', $job->company)->first();
 
