@@ -139,16 +139,14 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        {{ $jobs->links() }}
                                     @endisset
 
                                 </tbody>
                             </table>
                         </div>
 
-                        <!-- Pagination Here -->
-                        <nav>
-                            {{ $jobs->links('pagination::tailwind') }}
-                        </nav>
+
 
 
                     </div>
@@ -345,7 +343,7 @@
                     </div>
                 </div>
             </div>
-    
+
     @isset($job)
     <!-- Update script  -->
     <script>
@@ -579,7 +577,7 @@
 
         $(document).ready(function () {
             var previewButtons = document.querySelectorAll('[data-modal-target="readJobModal"]');
-            
+
             previewButtons.forEach(function (button) {
                 button.addEventListener('click', function () {
                     jobId = button.getAttribute('data-jobid');
@@ -606,7 +604,7 @@
                     $('#readJobModal #requirement').text(requirement);
                     $('#readJobModal #howto').text(howTo);
 
-                     // Call the callback function passing the jobId 
+                     // Call the callback function passing the jobId
                     onJobIdAssigned(jobId, function(updatedJobId) {
                         // Use the updatedJobId, if any processing is needed
                         console.log("Job ID assigned:", updatedJobId);
@@ -615,9 +613,9 @@
             });
         });
 
-        
+
         var detailsRoute = "{{ route('employer.job.detail', ['id' => ':id']) }}";
-           
+
         function redirectToJobDetail() {
             // Use the job from the callback
             onJobIdAssigned(jobId, function(updatedJobId) {
@@ -687,7 +685,7 @@
 
 
                     </dl>
-                    
+
                     @isset($job)
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-3 sm:space-x-4">
@@ -700,7 +698,7 @@
             </div>
         </div>
     </div>
-   
+
 
 
 

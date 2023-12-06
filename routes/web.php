@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/student/dashboard', function () {
-    $jobs = Job::all();
+    $jobs = Job::orderBy('created_at', 'desc')->paginate(4);
     return view('student.student-dashboard')->with('jobs', $jobs);
 })->middleware(['auth', 'verified'])->name('student.dashboard');
 

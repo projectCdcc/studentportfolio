@@ -14,7 +14,8 @@ class JobController extends Controller
       public function jobList()
       {
           // Retrieve all jobs from the jobs table as a collection
-          $jobs = Job::all();
+          $jobs = Job::orderBy('created_at', 'desc')->paginate(4);
+
 
           // Return the collection of jobs
           return view('employer.jobs.emp-job-list')->with('jobs', $jobs);

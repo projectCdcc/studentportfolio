@@ -54,7 +54,7 @@ class EmployerJobController extends Controller
         }
     }
 
-  
+
 
     //update job
     public function update(JobRequest $request, $id) {

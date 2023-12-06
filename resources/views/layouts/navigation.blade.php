@@ -170,7 +170,7 @@
 
             <div class="mt-3 space-y-1">
                 @if ( Auth::user()->type === 'student')
-                    <x-dropdown-link :href="route('student.profile.edit')">
+                    <x-dropdown-link :href="route('student.profile.detail')">
                         {{ __('View Profile') }}
                     </x-dropdown-link>
                     <x-dropdown-link :href="route('student.profile.edit')">

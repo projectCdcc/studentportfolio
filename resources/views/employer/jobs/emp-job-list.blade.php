@@ -32,7 +32,9 @@
                                         </th>
                                     </tr>
                                 </thead>
-
+                                {{-- @php
+                                dd($jobs);
+                                @endphp --}}
                                 @foreach($jobs as $job)
 
                                 <tbody>
@@ -59,12 +61,13 @@
                                 </tbody>
                                 @endforeach
                             </table>
+                            {{ $jobs->links() }}
                         </div>
-
                     @else
                 <h3>No Records found .....</h3>
                 @endif
             </div>
+
         </div>
 
 </x-app-layout>
