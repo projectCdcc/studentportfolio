@@ -35,19 +35,16 @@
             </div>
         </div>
 
-       
-
-       
-       
-
         <hr class="my-4">
 
         <div class="mb-4">
             <h2 class="text-xl font-base mb-2 font-montserrat">Company Overview</h2>
             <div class="my-6 mb-4">
                 <div class="flex items-start mb-4">
-                    <img src="/avatars/{{$userAvatar->avatar }}" alt="Company Logo" style="width: 200px; height: auto;" class="h-12 mr-4">
-                      <p class="text-gray-600 flex items-start">{{ $company->about }}</p>
+                    @if ($userAvatar)
+                        <img src="/avatars/{{$userAvatar->avatar}}" alt="Company Logo" style="width: 200px; height: auto;" class="h-12 mr-4">
+                    @endif
+                    <p class="text-gray-600 flex items-start">{{ $company->about }}</p>
                 </div>
             </div>
 

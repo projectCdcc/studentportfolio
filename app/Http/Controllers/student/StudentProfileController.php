@@ -154,9 +154,9 @@ class StudentProfileController extends Controller
                     ]);
                 }
             }
-            return Redirect::route('empProfile.edit')->with('upload', 'profile-updated');
+            return Redirect::route('student.profile.edit')->with('upload', 'profile-updated');
         } else {
-            return Redirect::route('empProfile.edit')->with('upload', 'Profile not updated!');
+            return Redirect::route('student.profile.edit')->with('upload', 'Profile not updated!');
         }
     }
 

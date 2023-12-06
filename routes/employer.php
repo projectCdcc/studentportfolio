@@ -6,6 +6,8 @@ use App\Http\Controllers\Employer\TransferUsersToEmployers;
 use App\Http\Controllers\Employer\EmployerJobController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Employer\JobController;
+use App\Models\Student;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,21 @@ use App\Http\Controllers\Employer\JobController;
 
 
 Route::get('/employer/dashboard', function () {
-    return view('employer.empdashboard');
+    $students = Student::with('user')->orderBy('created_at', 'desc')->paginate(4);
+    // Assuming you want to get the avatar of the first user associated with the first student.
+    
+    if ($students->isNotEmpty()) {
+        $avatars = $students->pluck('user.avatar')->filter();
+        
+
+        foreach ($avatars as $avatar) {
+            // Do something with each avatar
+            dd($avatar);
+        }
+    }
+    
+   
+    return view('employer.empdashboard')->with('students', $students);
 })->middleware(['auth', 'verified'])->name('employer.dashboard');
 
 
