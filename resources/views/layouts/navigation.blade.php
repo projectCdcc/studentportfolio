@@ -24,7 +24,7 @@
                         {{ __('Jobs List') }}
                     </x-nav-link>
 
-                    @auth
+                    <!-- @auth
                         @if (Auth::user()->type == 'student')
                         <x-nav-link :href="route('employer.dashboard')" :active="request()->routeIs('dashboard')" >
                             {{ __('Employers') }}
@@ -36,7 +36,7 @@
                         </x-nav-link>
 
                         @endif
-                    @endauth
+                    @endauth -->
 
                 </div>
             </div>

@@ -34,7 +34,7 @@
                                         <table class="w-full">
                                             <thead>
                                                 <tr
-                                                    class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+                                                    class="bg-purple-900 text-left text-xs font-semibold uppercase tracking-widest text-white">
                                                     <th class="px-5 py-3">ID</th>
                                                     <th class="px-5 py-3">Full Name</th>
                                                     <th class="px-5 py-3">Email</th>
@@ -44,16 +44,16 @@
                                             <tbody class="text-gray-500">
                                                 <tr>
                                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                                                        <p class="whitespace-no-wrap">3</p>
+                                                        <p class="whitespace-no-wrap">{{$data->user_id }}</p>
                                                     </td>
                                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                                                         <div class="flex items-center">
-                                                            <div class="h-10 w-10 flex-shrink-0">
+                                                            <!-- <div class="h-10 w-10 flex-shrink-0">
                                                                 <img class="h-full w-full rounded-full"
                                                                     src="/avatars/{{$data->user->avatar}}" alt="student_profile_pic" />
-                                                            </div>
+                                                            </div> -->
                                                             <div class="ml-3">
-                                                                <p class="whitespace-no-wrap">{{$data->username }}</p>
+                                                            <a href="{{ route('employer.view.student', [$id=$data->id]) }}" class="text-blue-800 hover:underline">{{ $data->username}}</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -61,7 +61,7 @@
                                                         <p class="whitespace-no-wrap"> {{ $data->email }}</p>
                                                     </td>
                                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                                                        <p class="whitespace-no-wrap">{{ $data->created_at }}</p>
+                                                        <p class="whitespace-no-wrap">{{ date('Y-m-d', strtotime($data->created_at)) }}</p>
                                                     </td>
                                                 </tr>
                                             </tbody>

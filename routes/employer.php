@@ -27,17 +27,6 @@ Route::get('/employer/dashboard', function () {
     $students = Student::with('user')->orderBy('created_at', 'desc')->paginate(4);
     // Assuming you want to get the avatar of the first user associated with the first student.
     
-    if ($students->isNotEmpty()) {
-        $avatars = $students->pluck('user.avatar')->filter();
-        
-
-        foreach ($avatars as $avatar) {
-            // Do something with each avatar
-            dd($avatar);
-        }
-    }
-    
-   
     return view('employer.empdashboard')->with('students', $students);
 })->middleware(['auth', 'verified'])->name('employer.dashboard');
 
@@ -49,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/employer/organization/update', [EmployerProfileController::class, 'orgUpdate'])->name('orgDetail.update');
     Route::delete('/employer/profile/destroy/', [EmployerProfileController::class, 'destroy'])->name('empProfile.destroy');
     Route::get('/employer/profile/detail', [EmployerProfileController::class, 'viewDetail'])->name('empProfile.detail');
+    Route::get('/employer/view/student/{id}', [EmployerProfileController::class, 'viewStudent'])->name('employer.view.student');
 });
 
 Route::middleware('guest')->group(function () {

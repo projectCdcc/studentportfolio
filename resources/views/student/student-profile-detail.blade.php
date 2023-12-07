@@ -23,7 +23,7 @@
 
             <div>
                 <h2 class="text-l font-base mb-2 font-montserrat">Graduate Date:</h2>
-                <p class="text-gray-400 text-sm font-montserrat">{{ $student->graduate_date }}</p>
+                <p class="text-gray-400 text-sm font-montserrat">{{ date('Y-m-d', strtotime($student->graduate_date)) }}</p>
             </div>
             
             <div>

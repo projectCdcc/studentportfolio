@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Employer;
 use App\Models\User;
+use App\Models\Student;
 use App\Models\Job;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -188,6 +189,17 @@ class EmployerProfileController extends Controller
          return redirect()->route('empProfile.edit')->with('update', 'Profile updated successfully.');
 
     }
+
+    /**
+     * 
+     * employer view student details 
+     */
+
+     public function viewStudent($id) {
+        $student = Student::where('id', $id)->first();
+        return view('student.student-profile-detail')->with('student', $student);
+    }
+ 
 
 
 
