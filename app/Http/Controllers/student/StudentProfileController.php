@@ -19,11 +19,11 @@ use App\Models\Employer;
 use App\Models\User;
 use App\Models\Job;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\Storage;
 
 class StudentProfileController extends Controller
 {
-  
+
     /**
      * Display the student's profile form.
      */
@@ -32,20 +32,20 @@ class StudentProfileController extends Controller
      {
          // retrieve authenticated student info
          $user = $request->user();
-         
+
          $student = Student::where('user_id', $user->id)->first();
- 
+
          return view('student.student-edit', [
              'user' => $request->user(), 'student'=>$student,
          ]);
      }
- 
+
      /**
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
-    {   
-        
+    {
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -54,17 +54,17 @@ class StudentProfileController extends Controller
 
         // Retrieve the authenticated user
         $user = $request->user();
-        
+
         // check if the user exist
         $check = User::where('id', $user->id)->first();
 
         // match the user == employer based on userid
         $student = Student::where('user_id', $check->id)->first();
 
-        
-      
+
+
         // dd($student->username);
-            
+
         if ($student) {
             $student->update([
                 'username' => $user->username,
@@ -81,21 +81,21 @@ class StudentProfileController extends Controller
             $userUpdated = $request->user()->save();
 
         }
-       
-        
+
+
         return Redirect::route('student.profile.edit')->with('status', 'profile-updated');
     }
-    
+
 
     /**
-     * 
+     *
      * Update student profile pictures
      */
-    
+
     public function avatarUpdate(AvatarRequest $request, $id): RedirectResponse {
         /**
-         * Validated the array values of inputs. 
-         * 
+         * Validated the array values of inputs.
+         *
          */
         $request->user()->fill($request->validated());
 
@@ -107,11 +107,11 @@ class StudentProfileController extends Controller
             $uniqueName = $request->file('avatar')->hashName();
             $avatarName = $uniqueName;
 
-          
+
              // Update the user's record in the database with the avatar file name or path
             $user = User::where('id', $id)->first();
-           
-            
+
+
             // Check if the employer has an existing avatar
             if (!is_null($user->avatar)) {
 
@@ -128,7 +128,7 @@ class StudentProfileController extends Controller
                    * move the file to public/avatars folder
                    */
                 $request->avatar->move(public_path('avatars'), $avatarName);
-            
+
                 // Check if the user is an employer and the organization_name matches the username
                 if ($user->isStudent()) {
 
@@ -143,8 +143,8 @@ class StudentProfileController extends Controller
                    * move the file to public/avatars folder
                    */
                     $request->avatar->move(public_path('avatars'), $avatarName);
-            
-              
+
+
                 // Check if the user is an employer and the organization_name matches the username
                 if ($user->isStudent()) {
 
@@ -163,14 +163,14 @@ class StudentProfileController extends Controller
 
     /**
      * Update student details.
-     * 
+     *
      */
 
     public function detailUpdate(StudentProfileUpdateRequest $request): RedirectResponse {
         // Retrieve the authenticated user
         $user = $request->user();
-        
-      
+
+
         // Use the relationship to get the associated employer
         $student = $user->student;
 
@@ -182,16 +182,16 @@ class StudentProfileController extends Controller
                 'about_me' => $request->input('about_me'),
             ]);
         }
- 
+
          // Redirect back to the profile edit page with a success message
          return redirect()->route('student.profile.edit')->with('update', 'profile-updated');
-     
+
     }
 
 
     /**
-     * Student View details 
-     * 
+     * Student View details
+     *
      */
 
      public function viewDetail(Request $request): view {

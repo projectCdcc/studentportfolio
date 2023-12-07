@@ -15,23 +15,23 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 @auth
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="Auth::check() ? (Auth::user()->type == 'student' ? route('student.dashboard') : route('employer.dashboard')) : null" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="Auth::check() ? (Auth::user()->type == 'student' ? route('student.dashboard') : route('employer.dashboard')) : null" :active="request()->routeIs(['student.dashboard', 'employer.dashboard'])">
                             {{ __('Dashboard') }}
                         </x-nav-link>
                     </div>
                 @endauth
-                    <x-nav-link :href="route('job.list')" :active="request()->routeIs('employer.job.list')">
+                    <x-nav-link :href="route('job.list')" :active="request()->routeIs('job.list')">
                         {{ __('Jobs List') }}
                     </x-nav-link>
 
                     <!-- @auth
                         @if (Auth::user()->type == 'student')
-                        <x-nav-link :href="route('employer.dashboard')" :active="request()->routeIs('dashboard')" >
+                        <x-nav-link :href="route('employer.dashboard')" :active="request()->routeIs('employer.dashboard')" >
                             {{ __('Employers') }}
                         </x-nav-link>
 
                         @else
-                        <x-nav-link :href="route('student.dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('student.dashboard')" :active="request()->routeIs('student.dashboard')">
                             {{ __('Students') }}
                         </x-nav-link>
 
@@ -106,8 +106,8 @@
                     </x-slot>
 
                     <x-slot name="content">
-                    
-                    <x-dropdown-link :href="Auth::check() ? (Auth::user()->type == 'student' ? route('student.dashboard') : route('employer.dashboard')) : null" :active="request()->routeIs('dashboard')">
+
+                    <x-dropdown-link :href="Auth::check() ? (Auth::user()->type == 'student' ? route('student.dashboard') : route('employer.dashboard')) : null" :active="request()->routeIs(['student.dashboard', 'employer.dashboard'])">
                             {{ __('Dashboard') }}
                     </x-dropdown-link>
 
@@ -156,7 +156,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('student.dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('student.dashboard')" :active="request()->routeIs('student.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('job.list')" :active="request()->routeIs('job.list')">

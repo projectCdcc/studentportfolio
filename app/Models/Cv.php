@@ -9,8 +9,13 @@ class Cv extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'student_id',
+        'attachment',
+    ];
 
-    // Database relationship 
+
+    // Database relationship
     public function student()
     {
         return $this->belongsTo(Student::class);

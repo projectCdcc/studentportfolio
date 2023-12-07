@@ -6,6 +6,7 @@ use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\StudentProfileController;
 use App\Models\Job;
 use App\Http\Controllers\Employer\JobController;
+use App\Http\Controllers\Student\StudentCvController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,9 +62,13 @@ Route::middleware('auth')->group(function() {
     Route::get('/student/job/detail/id={id}', [JobController::class, 'jobDetail'])->name('job.detail');
 });
 
-
+/**
+ *
+ * Student cv routes
+ */
 Route::middleware('auth')->group(function () {
-    // Route::get('/employer/profile', [EmployerProfileController::class, 'edit'])->name('empProfile.edit');
+    Route::get('/student/cv/', [StudentCvController::class, 'create'])->name('student.cv.view');
+    Route::post('/student/cv/upload/{id}', [StudentCvController::class, 'upload'])->name('student.cv.upload');
     // Route::patch('/employer/profile', [EmployerProfileController::class, 'update'])->name('empProfile.update');
     // Route::patch('/employer/avatarupdate/{id}', [EmployerProfileController::class, 'avatarUpdate'])->name('empAvatar.update');
     // Route::patch('/employer/organization/update', [EmployerProfileController::class, 'orgUpdate'])->name('orgDetail.update');
