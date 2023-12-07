@@ -106,6 +106,10 @@
                     </x-slot>
 
                     <x-slot name="content">
+                    
+                    <x-dropdown-link :href="Auth::check() ? (Auth::user()->type == 'student' ? route('student.dashboard') : route('employer.dashboard')) : null" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                    </x-dropdown-link>
 
                     <x-dropdown-link :href="auth()->user()->type == 'student' ? route('student.profile.detail') : route('empProfile.detail')">
                         {{ __('View Profile') }}

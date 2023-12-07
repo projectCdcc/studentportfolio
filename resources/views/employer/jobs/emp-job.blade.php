@@ -139,6 +139,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        
                                         {{ $jobs->links() }}
                                     @endisset
 

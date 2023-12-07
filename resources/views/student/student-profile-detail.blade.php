@@ -17,7 +17,7 @@
         <div class="grid grid-cols-3 gap-4 mb-4 mx-auto w-full max-w-screen-lg ">
             
             <div class="text-centre">
-                <h2 class="text-l font-base mb-2 font-montserrat">Established in: </h2>
+                <h2 class="text-l font-base mb-2 font-montserrat">Email: </h2>
                 <p class="text-gray-400 text-sm font-montserrat">{{ $student->email}}</p>
             </div>
 
@@ -28,7 +28,7 @@
             
             <div>
                 <h2 class="text-l font-base mb-2 font-montserrat">Profession:</h2>
-                <p class="text-gray-400 text-sm font-montserrat">{{ __('Apps developer') }}</p>
+                <p class="text-gray-400 text-sm font-montserrat">{{ __('Null') }}</p>
             </div>
 
             
@@ -44,9 +44,16 @@
                       <p class="text-gray-600 flex items-start">{{ $student->about_me }}</p>
                 </div>
             </div>
-
         </div>
 
+        <div class="mb-4">
+            <h2 class="text-xl font-base mb-2 font-montserrat">My CV</h2>
+            <div class="my-6 mb-4">
+                <div class="flex items-start mb-4">
+                      <p class="text-gray-600 flex items-start">My CV</p>
+                </div>
+            </div>
+        </div>
         <!-- <div class="my-6 py-2">
             <h2 class="text-xl font-base my-4 font-montserrat"><span>Description</span></h2>
             <p class="text-gray-700 border-t pt-4">{{-- $job->description --}}</p>
