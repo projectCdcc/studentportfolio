@@ -15,6 +15,7 @@ use App\Models\Employer;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Job;
+use App\Models\Cv;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -191,15 +192,23 @@ class EmployerProfileController extends Controller
     }
 
     /**
-     * 
-     * employer view student details 
+     *
+     * employer view student details
      */
 
      public function viewStudent($id) {
         $student = Student::where('id', $id)->first();
-        return view('student.student-profile-detail')->with('student', $student);
+
+        $user = User::where('id', $student->user_id)->first();
+
+        $cv = Cv::where('student_id', $student->id)->first();
+        return view('student.student-profile-detail', [
+           'student' => $student,
+           'cv' =>$cv,
+           'user' =>$user,
+        ]);
     }
- 
+
 
 
 

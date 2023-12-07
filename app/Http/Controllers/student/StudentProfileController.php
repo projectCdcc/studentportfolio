@@ -17,6 +17,7 @@ use App\Http\Requests\StudentProfileUpdateRequest;
 use App\Http\Requests\AvatarRequest;
 use App\Models\Employer;
 use App\Models\User;
+use App\Models\Cv;
 use App\Models\Job;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -202,8 +203,11 @@ class StudentProfileController extends Controller
        // student-specific information
        $student = Student::where('user_id', $user->id)->first();
 
+       $cv = Cv::where('student_id', $student->id)->first();
+
        return view('student.student-profile-detail', [
            'student' => $student,
+           'cv' =>$cv,
        ]);
    }
 

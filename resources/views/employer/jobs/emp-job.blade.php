@@ -139,7 +139,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                                        
+
                                         {{ $jobs->links() }}
                                     @endisset
 
@@ -369,7 +369,7 @@
             // Set the modal form placeholders dynamically
             $('#updateJobModal #jobTitleInput').val(jobTitle);
             $('#updateJobModal #cityInput').val(city);
-            $('#updateJobModal #countryInput').val(country);
+            $('#updateJobModal #countryInput') .val(country);
             $('#updateJobModal #companyInput').val(company);
             $('#updateJobModal #descriptionInput').val(description);
             $('#updateJobModal #categoryInput').val(category);
