@@ -202,7 +202,7 @@ class EmployerProfileController extends Controller
         $user = User::where('id', $student->user_id)->first();
 
         $cv = Cv::where('student_id', $student->id)->first();
-        return view('student.student-profile-detail', [
+        return view('employer.employer-view-student', [
            'student' => $student,
            'cv' =>$cv,
            'user' =>$user,

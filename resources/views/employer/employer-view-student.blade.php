@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile Details') }}
+            {{ __('Student Profile') }}
         </h2>
     </x-slot>
 
     <div class="max-w-5xl mx-auto mb-8 mt-2 p-6 bg-white rounded-lg shadow-lg ">
         <div class="pt-10 pb-3 flex flex-col items-center justify-center">
-            <img src="/avatars/{{Auth::user()->avatar}}" alt="User-profile-pic" style="width: 200px; height: auto;" class="h-12 mr-4">
+            <img src="/avatars/{{$user->avatar}}" alt="User-profile-pic" style="width: 200px; height: auto;" class="h-12 mr-4">
             <h1 class="text-4xl text-gray-800 font-base text-center mt-6 mb-2 font-montserrat">{{ $student->username }}</h1>
 
         </div>

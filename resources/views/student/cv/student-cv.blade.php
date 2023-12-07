@@ -47,10 +47,12 @@
 
                                         @if(isset($cv))
                                             <div class="my-8 flex items-center">
-                                               
+                                                <div style="width: 100%; overflow-x: auto;">
+                                                    <embed src="/cv/{{$cv->attachment}}" style="width: 100%; height: 1100px;" type="application/pdf">
+                                                </div>
                                             </div>
                                         @else
-                                            <p></p>
+                                            <p>No CV uploaded</p>
                                         @endif
 
                                     </form>
