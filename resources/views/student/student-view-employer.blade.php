@@ -7,7 +7,7 @@
 
     <div class="max-w-5xl mx-auto mb-8 mt-2 p-6 bg-white rounded-lg shadow-lg ">
         <div class="pt-10 pb-3 flex flex-col items-center justify-center">
-            <img src="/avatars/{{Auth::user()->avatar }}" alt="Company Logo" style="width: 200px; height: auto;" class="h-12 mr-4">
+            <img src="/avatars/{{$user->avatar }}" alt="Company Logo" style="width: 200px; height: auto;" class="h-12 mr-4">
             <h1 class="text-4xl text-gray-800 font-base text-center mt-6 mb-2 font-montserrat">{{ $employer->organization_name }}</h1>
             <p class="pb-2 text-gray-500 text-center"> <span class="text-slate-600 text-sm flex gap-1 items-center"> 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
