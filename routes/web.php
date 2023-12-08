@@ -38,7 +38,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/student-profile/edit/', [StudentProfileController::class, 'edit'])->name('student.profile.edit');
     Route::patch('/student-profile/update', [StudentProfileController::class, 'update'])->name('student.profile.update');
-    Route::get('/student-profile/delete', [StudentProfileController::class, 'destroy'])->name('student.profile.delete');
+    Route::delete('/student-profile/delete', [StudentProfileController::class, 'destroy'])->name('student.profile.delete');
     Route::get('/student-profile/detail', [StudentProfileController::class, 'viewDetail'])->name('student.profile.detail');
     Route::patch('/student-avatarupdate/{id}', [StudentProfileController::class, 'avatarUpdate'])->name('student.avatar.update');
     Route::patch('/student-profile/detailupdate', [StudentProfileController::class, 'detailUpdate'])->name('student.detail.update');

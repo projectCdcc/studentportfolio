@@ -157,7 +157,6 @@ class EmployerProfileController extends Controller
         }
     }
 
-
     /**
      * Update Organization Information
      *
@@ -209,9 +208,6 @@ class EmployerProfileController extends Controller
         ]);
     }
 
-
-
-
     /**
      * Employer View details
      *
@@ -231,7 +227,7 @@ class EmployerProfileController extends Controller
     }
 
     /**
-     * Delete the user's account.
+     * Delete the user's account (Employer)
      */
     public function destroy(Request $request): RedirectResponse
     {

@@ -213,11 +213,48 @@ class StudentProfileController extends Controller
 
 
     /**
-     * Destroy an authenticated session.
+     * Delete the user's account (Student)
      */
     public function destroy(Request $request): RedirectResponse
-    {
+    {   
+        // validate if the userDElection is confirmed by the password. 
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current-password'],
+        ]);
+
+        $user = $request->user();
+        $avatarFilename = $user->avatar;
+
+
+        if ($avatarFilename) {
+            $existingAvatarPath = public_path('avatars') . '/' .$avatarFilename;
+
+            // Delete the avatar file if it exists
+            if (File::exists($existingAvatarPath)) {
+                File::delete($existingAvatarPath);
+            }
+        }
+
+        $student = Student::where('user_id', $user->id)->first();
+
+        $cv = Cv::where('student_id', $student->id)->first();
+
+        $cvFilename = $cv->attachment;
+
+        // Delte the cv upload by the user. 
+
+        if ($cvFilename) {
+            $existingCvPath = public_path('cv') . '/' .$cvFilename;
+
+            // Delete the avatar file if it exists
+            if (File::exists($existingCvPath)) {
+                File::delete($existingCvPath);
+            }
+        }
+
         Auth::guard('web')->logout();
+
+        $user->delete();
 
         $request->session()->invalidate();
 
