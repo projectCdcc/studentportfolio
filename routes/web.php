@@ -63,17 +63,23 @@ Route::middleware('auth')->group(function() {
 });
 
 /**
+ * Standalone route
+ */
+
+ Route::get('/view/employer/{id}', [StudentProfileController::class, 'viewEmployer'])->name('view.employer');
+
+
+
+
+/**
  *
  * Student cv routes
  */
 Route::middleware('auth')->group(function () {
     Route::get('/student/cv/', [StudentCvController::class, 'create'])->name('student.cv.view');
     Route::post('/student/cv/upload/{id}', [StudentCvController::class, 'upload'])->name('student.cv.upload');
-    // Route::patch('/employer/profile', [EmployerProfileController::class, 'update'])->name('empProfile.update');
-    // Route::patch('/employer/avatarupdate/{id}', [EmployerProfileController::class, 'avatarUpdate'])->name('empAvatar.update');
-    // Route::patch('/employer/organization/update', [EmployerProfileController::class, 'orgUpdate'])->name('orgDetail.update');
-    // Route::delete('/employer/profile/destroy/', [EmployerProfileController::class, 'destroy'])->name('empProfile.destroy');
-    // Route::get('/employer/profile/detail', [EmployerProfileController::class, 'viewDetail'])->name('empProfile.detail');
 });
 
 require __DIR__.'/auth.php';
+
+

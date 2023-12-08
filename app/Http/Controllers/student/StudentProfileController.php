@@ -212,6 +212,28 @@ class StudentProfileController extends Controller
    }
 
 
+   /**
+     *
+     * Student view employer details
+     */
+
+     public function viewEmployer($id) {
+        $job = Job::where('id', $id)->first();
+
+        $employer = Employer::where('organization_name', $job->company)->first();
+
+        $user = User::where('id', $employer->user_id)->first();
+
+        return view('student.student-view-employer', [
+           'employer' => $employer,
+           'user' =>$user,
+        ]);
+    }
+
+
+
+
+
     /**
      * Delete the user's account (Student)
      */

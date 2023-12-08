@@ -48,10 +48,6 @@
                                                     </td>
                                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                                                         <div class="flex items-center">
-                                                            <!-- <div class="h-10 w-10 flex-shrink-0">
-                                                                <img class="h-full w-full rounded-full"
-                                                                    src="/avatars/{{$data->user->avatar}}" alt="student_profile_pic" />
-                                                            </div> -->
                                                             <div class="ml-3">
                                                             <a href="{{ route('employer.view.student', [$id=$data->id]) }}" class="text-blue-800 hover:underline">{{ $data->username}}</a>
                                                             </div>
@@ -73,6 +69,10 @@
                         </div>
                     </div>
                 </div>
+                @else 
+
+                <span class="text-lg text-gray-500">No Students have been registered!</span>
+                
                 @endif
 
             </div>

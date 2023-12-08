@@ -8,7 +8,7 @@
     <div class="max-w-5xl mx-auto mb-8 mt-2 p-6 bg-white rounded-lg shadow-lg ">
         <div class="py-10">
             <h1 class="text-4xl text-gray-800 font-base text-center mb-2 font-montserrat">{{ $job->title }}</h1>
-            <p class="pb-2 pt-4 text-gray-500 text-center"> <span class="font-semibold">at</span> <span class="uppercase text-blue-400 font-bold">{{ $job->company }}</span> <span class="font-semibold">as </span><span class="bg-yellow-400 font-bold text-xs text-white rounded px-3">{{ $job->job_type }}</span></p>
+            <p class="pb-2 pt-4 text-gray-500 text-center"> <span class="font-semibold">at</span> <span class="uppercase text-blue-400 font-bold">  <a href="{{ route('view.employer', [$id=$job->id]) }}" class="text-blue-800 hover:underline">{{ $job->company }}</a>   </span> <span class="font-semibold">as </span><span class="bg-yellow-400 font-bold text-xs text-white rounded px-3">{{ $job->job_type }}</span></p>
         </div>
         
         <hr class="my-4">
