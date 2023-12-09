@@ -22,7 +22,10 @@ class EmployerJobController extends Controller
 
         $employer = Employer::where('organization_name', $user->username)->first();
 
-        $jobs = Job::where('company', $employer->organization_name)->paginate(10);
+        $jobs = Job::where('company', $employer->organization_name)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
 
         return view('employer.jobs.emp-job')->with('jobs', $jobs);
     }
