@@ -28,7 +28,7 @@
                                     <div class="flex items-center justify-between">
                                     </div>
                                 </div>
-                            @foreach($students as $data)    
+                            
                                 <div class="overflow-y-hidden rounded-lg border">
                                     <div class="overflow-x-auto">
                                         <table class="w-full">
@@ -41,6 +41,7 @@
                                                     <th class="px-5 py-3">Created at</th>
                                                 </tr>
                                             </thead>
+                                            @foreach($students as $data)   
                                             <tbody class="text-gray-500">
                                                 <tr>
                                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
@@ -61,10 +62,11 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
+                                            @endforeach
                                         </table>
                                     </div>
-                                @endforeach
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

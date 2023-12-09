@@ -211,7 +211,6 @@ class StudentProfileController extends Controller
        ]);
    }
 
-
    /**
      *
      * Student view employer details
@@ -229,9 +228,6 @@ class StudentProfileController extends Controller
            'user' =>$user,
         ]);
     }
-
-
-
 
 
     /**
