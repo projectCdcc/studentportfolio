@@ -1,9 +1,11 @@
-<!-- Logo for light theme -->
-![Light Logo](logo_black.png)
-
-<!-- Logo for dark theme -->
-![Dark Logo](logo_white.png)
-
+<!-- Auto-generated logo based on theme -->
+{% if site.github.dark_theme %}
+    <!-- Logo for dark theme -->
+    ![Dark Logo](logo_white.png)
+{% else %}
+    <!-- Logo for light theme -->
+    ![Light Logo](logo_black.png)
+{% endif %}
 
 # <div style="text-align: center;">Careerdatabase Platform</div>
 
