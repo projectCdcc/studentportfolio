@@ -1,7 +1,9 @@
-<picture align="center">
-  <source media="(prefers-color-scheme: dark)" srcset="logo_white.png">
-  <source media="(prefers-color-scheme: light)" srcset="logo_black.png">
-</picture>
+<!-- Logo for light theme -->
+![Light Logo](logo_black.png)
+
+<!-- Logo for dark theme -->
+![Dark Logo](logo_white.png)
+
 
 # <div style="text-align: center;">Careerdatabase Platform</div>
 
