@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} | Home</title>
+    <title>{{ config('app.name', 'Laravel') }} | About </title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -266,58 +266,51 @@
 
                     @endauth
 
-
-
-
                 </div>
             </nav>
+            <x-slot name="header">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    {{ __('Jobs List') }}
+                </h2>
+            </x-slot>
 
-            <!-- Hero Section  -->
-            @if(auth()->check())
-                @if (Auth::user()->type== 'student')
-                <header class="bg-white dark:bg-gray-900">
-                    <div class="w-full bg-center bg-cover h-screen" style="background-image: url('{{ asset('images/aiu-road.jpg') }}');  height: 91vh; overflow: hidden;">
-                        <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
-                            <div class="text-center">
-                                <h1 class="text-3xl font-semibold text-white lg:text-4xl">"Craft your <span class="text-blue-400">Career</span> with purpose and passion"</h1>
-                                <br>
-                                <p class="text-3xl font-thin text-white font-mono">Welcome</p>
-                            </div>
-                        </div>
-                    </div>
-                </header>
-
-                @else
-                <header class="bg-white dark:bg-gray-900">
-                    <div class="w-full bg-center bg-cover h-screen" style="background-image: url('{{ asset('images/aiu-road.jpg') }}');  height: 91vh; overflow: hidden;">
-                        <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
-                            <div class="text-center">
-                                <h1 class="text-3xl font-semibold text-white lg:text-4xl">"Find <span class="text-blue-400">Talent</span>, Build Success"</h1>
-                                <br>
-                                <p class="text-3xl font-thin text-white font-mono">Welcome</p>
-                            </div>
-                        </div>
-                    </div>
-                </header>
-
-
-                @endif
-            @else
-            <header class="bg-white dark:bg-gray-900">
-                <div class="w-full bg-center bg-cover h-screen" style="background-image: url('{{ asset('images/aiu-road.jpg') }}');  height: 91vh; overflow: hidden;">
-                    <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
-                        <div class="text-center">
-                            <h1 class="text-3xl font-semibold text-white lg:text-4xl">Discover your exciting <span class="text-blue-200 border border-white border-4">Career</span> journey ahead</h1>
-                            <a href="{{ route('job.list') }}">
-                                <br>
-                            <button class="w-full px-5 py-2 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">Search career</button>
+        <div class="py-4">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                
+                <div class="bg-white dark:bg-gray-800 px-3 md:px-4 py-12 flex flex-col justify-center items-center">
+                    <div role="img" aria-label="Luxe. Logo.">
+                            <a href="{{ route('welcome') }}">
+                                <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                             </a>
                         </div>
+                        <h1 class="mt-8 md:mt-12 text-3xl lg:text-4xl font-semibold leading-10 text-center text-gray-800 text-center md:w-9/12 lg:w-7/12 dark:text-white">About the Careerdatabase Platform </h1>
+                        <p class="mt-10 text-base leading-normal text-center text-gray-600 md:w-9/12 lg:w-7/12 dark:text-white">The Careerdatabase serves as a bridge platform connecting students with organizations and companies. On this platform, students can explore job opportunities posted by various entities and apply for positions by following the instructions outlined in the respective job listings' 'How To' section.</p>
+                        <div class="mt-12 md:mt-14 w-full flex justify-center">
+                        <a href="/"><button class="w-full px-5 py-2 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">Back to home</button>
+                        </a>  
+                    </div>
+                    <hr>
                     </div>
                 </div>
-            </header>
-        </div>
-        @endif
+
+                <div class="bg-white dark:bg-gray-800 px-3 md:px-4 py-12 flex flex-col justify-center items-center">
+                        <h1 class=" text-3xl lg:text-xl font-semibold leading-10 text-center text-gray-800 text-center md:w-9/12 lg:w-7/12 dark:text-white">User manual</h1>
+                        <p class="my-2 text-base leading-normal text-center text-gray-600 md:w-9/12 lg:w-7/12 dark:text-white">How to use the platform.</p>
+                        <embed src="{{ asset('about/user_manual.pdf') }}" width="720" height="720" type="application/pdf">
+                        
+                        
+                    </div>
+                    <hr>
+                    </div>
+                </div>
+
+                
+
+
+            </div>
+
+
+
 
         @include('layouts.footer')
 

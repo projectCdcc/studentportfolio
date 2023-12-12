@@ -24,6 +24,10 @@
                         {{ __('Jobs List') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                                    {{ __('About') }}
+                    </x-nav-link>
+
                     <!-- @auth
                         @if (Auth::user()->type == 'student')
                         <x-nav-link :href="route('employer.dashboard')" :active="request()->routeIs('employer.dashboard')" >

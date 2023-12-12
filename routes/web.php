@@ -29,6 +29,16 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+
+/**
+ * 
+ * About page route (about)
+ */
+
+Route::get('/home/about', function() {
+    return view('about');
+})->name('about'); 
+
 /**
  *
  * Students routes
@@ -67,8 +77,6 @@ Route::middleware('auth')->group(function() {
  */
 
  Route::get('/view/employer/{id}', [StudentProfileController::class, 'viewEmployer'])->name('view.employer');
-
-
 
 
 /**
