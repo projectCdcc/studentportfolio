@@ -27,8 +27,8 @@
             </div>
 
             <div>
-                <h2 class="text-l font-base mb-2 font-montserrat">Profession:</h2>
-                <p class="text-gray-400 text-sm font-montserrat">{{ __('Null') }}</p>
+                <h2 class="text-l font-base mb-2 font-montserrat">Major:</h2>
+                <p class="text-gray-400 text-sm font-montserrat">{{ $student->major }}</p>
             </div>
 
 

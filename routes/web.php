@@ -31,13 +31,13 @@ Route::get('/', function () {
 
 
 /**
- * 
+ *
  * About page route (about)
  */
 
 Route::get('/home/about', function() {
     return view('about');
-})->name('about'); 
+})->name('about');
 
 /**
  *
@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/student/dashboard', function () {
-    $jobs = Job::orderBy('created_at', 'desc')->paginate(4);
+    $jobs = Job::orderBy('created_at', 'desc')->paginate(6);
     return view('student.student-dashboard')->with('jobs', $jobs);
 })->middleware(['auth', 'verified'])->name('student.dashboard');
 

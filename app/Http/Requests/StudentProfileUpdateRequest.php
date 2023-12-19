@@ -25,6 +25,7 @@ class StudentProfileUpdateRequest extends FormRequest
     {
         return [
             //
+            'major' => 'string|max:255',
             'graduate_date' => 'string|max:255',
             'about_me' => 'string|max:255',
         ];

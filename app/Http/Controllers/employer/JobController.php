@@ -14,7 +14,7 @@ class JobController extends Controller
       public function jobList()
       {
           // Retrieve all jobs from the jobs table as a collection
-          $jobs = Job::orderBy('created_at', 'desc')->paginate(5);
+          $jobs = Job::orderBy('created_at', 'desc')->paginate(8);
 
 
           // Return the collection of jobs

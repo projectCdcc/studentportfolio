@@ -34,6 +34,8 @@ class StudentController extends AdminController
         $grid->column('about_me', __('About me'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
+        $grid->column('major', __('Major'));
+
 
         return $grid;
     }
@@ -56,6 +58,8 @@ class StudentController extends AdminController
         $show->field('about_me', __('About me'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
+        $show->field('major', __('Major'));
+
 
         return $show;
     }
@@ -74,6 +78,8 @@ class StudentController extends AdminController
         $form->email('email', __('Email'));
         $form->datetime('graduate_date', __('Graduate date'))->default(date('Y-m-d H:i:s'));
         $form->textarea('about_me', __('About me'));
+        $form->text('major', __('Major'));
+
 
         return $form;
     }

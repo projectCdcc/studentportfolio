@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    
-    
+
+
      /**
      * The attributes that are mass assignable.
      *
@@ -21,10 +21,11 @@ class Student extends Model
         'graduate_date',
         'about_me',
         'user_id',
+        'major',
     ];
 
 
-    // Database table relationship 
+    // Database table relationship
     public function user()
     {
         return $this->belongsTo(User::class, 'id');

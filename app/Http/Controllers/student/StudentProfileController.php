@@ -179,6 +179,7 @@ class StudentProfileController extends Controller
         if ($student) {
             // Update employer-specific fields
             $student->update([
+                'major' => $request->input('major'),
                 'graduate_date' => $request->input('graduate_date'),
                 'about_me' => $request->input('about_me'),
             ]);
@@ -234,8 +235,8 @@ class StudentProfileController extends Controller
      * Delete the user's account (Student)
      */
     public function destroy(Request $request): RedirectResponse
-    {   
-        // validate if the userDElection is confirmed by the password. 
+    {
+        // validate if the userDElection is confirmed by the password.
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current-password'],
         ]);
@@ -259,7 +260,7 @@ class StudentProfileController extends Controller
 
         $cvFilename = $cv->attachment;
 
-        // Delte the cv upload by the user. 
+        // Delte the cv upload by the user.
 
         if ($cvFilename) {
             $existingCvPath = public_path('cv') . '/' .$cvFilename;
