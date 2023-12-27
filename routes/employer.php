@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Employer\JobController;
 use App\Models\Student;
 use App\Models\User;
+use App\Http\Controllers\Employer\EmployerDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +24,8 @@ use App\Models\User;
 //Route::get('/empProfile', [EmployerProfileController::class, 'edit'])->name('empProfile');
 
 
-Route::get('/employer/dashboard', function () {
-    $students = Student::with('user')->orderBy('created_at', 'desc')->paginate(4);
-    // Assuming you want to get the avatar of the first user associated with the first student.
-    
-    return view('employer.empdashboard')->with('students', $students);
-})->middleware(['auth', 'verified'])->name('employer.dashboard');
+Route::get('/employer/dashboard', [EmployerDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('employer.dashboard');
+Route::get('/search',[EmployerDashboardController::class, 'search'])->middleware(['auth', 'verified']);
 
 
 Route::middleware('auth')->group(function () {

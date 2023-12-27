@@ -6,12 +6,13 @@
         </h2>
     </x-slot>
 
+<div class="pb-8">
     <div class="max-w-5xl mx-auto mb-8 mt-2 p-6 bg-white rounded-lg shadow-lg ">
         <div class="py-10">
             <h1 class="text-4xl text-gray-800 font-base text-center mb-2 font-montserrat">{{ $job->title }}</h1>
             <p class="pb-2 pt-4 text-gray-500 text-center"> <span class="font-semibold">at</span> <span class="uppercase text-blue-400 font-bold">  <a href="{{ route('view.employer', [$id=$job->id]) }}" class="text-blue-800 hover:underline">{{ $job->company }}</a>   </span> <span class="font-semibold">as </span><span class="bg-yellow-400 font-bold text-xs text-white rounded px-3">{{ $job->job_type }}</span></p>
         </div>
-        
+
         <hr class="my-4">
 
         <div class="grid grid-cols-4 gap-4 mb-4 mx-auto w-full max-w-screen-lg">
@@ -55,7 +56,7 @@
             <h2 class="text-xl font-base my-4 font-montserrat"><span>Description</span></h2>
             <p class="text-gray-700 border-t pt-4">{{ $job->description }}</p>
         </div>
-       
+
 
         <div class="mb-6">
             <h2 class="text-xl font-base my-4 font-montserrat"><span>Requirements: </span></h2>
@@ -68,8 +69,13 @@
             </h2>
             <p class="text-gray-700 border-t pt-4">{{ $job->how_to }}</p>
         </div>
-        
+
+        <hr>
+        <div class="container mt-4">
+            <h2 class="mb-5 text-center">Share this job</h2>
+            {!! $shareComponent !!}
+        </div>
     </div>
 
-
+</div>
 </x-app-layout>

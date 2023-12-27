@@ -30,8 +30,22 @@ class JobController extends Controller
         $userAvatar = User::where('username', $job->company)->first();
         // dd($userAvatar->avatar);
         $company = Employer::where('organization_name', $job->company)->first();
+            // Construct the share message
+        $shareMessage = $job->title . ' - ' . $job->description;
 
-        return view('employer.jobs.emp-job-detail')->with(['job' => $job, 'company' => $company, 'userAvatar'=>$userAvatar]);
+        $shareComponent = \Share::page(request()->url(),
+                        $shareMessage
+            )
+            ->facebook()
+            ->twitter()
+            ->linkedin()
+            ->telegram()
+            ->whatsapp()
+            ->reddit();
+
+
+
+        return view('employer.jobs.emp-job-detail')->with(['job' => $job, 'company' => $company, 'userAvatar'=>$userAvatar, 'shareComponent'=>$shareComponent]);
       }
 
 }

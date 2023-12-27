@@ -51,6 +51,30 @@
         'Transport and Logistics',
         ];
 
+        $organizationType = [
+        'Education',
+        'Healthcare',
+        'Government',
+        'Information Technology',
+        'Nonprofit',
+        'Manufacturing',
+        'Retail',
+        'Finance',
+        'Hospitality',
+        'Real Estate',
+        'Transportation and Logistics',
+        'Media and Entertainment',
+        'Energy and Utilities',
+        'Construction',
+        'Telecommunications',
+        'Legal Services',
+        'Agriculture and Forestry',
+        'Mining and Metals',
+        'Environmental Services',
+        'Research and Development',
+        'Religious Organization'];
+
+
         $selected = [
 
         ];
@@ -63,9 +87,50 @@
     <div class="grid grid-cols-2 gap-4">
         <div>
             <x-input-label for="org_type" :value="__('Organization Type')" />
-            <x-text-input id="org_type" name="org_type" type="text" class="mt-1 block w-full text-gray-400" :value="old('org_type', $employer->org_type)" required autofocus autocomplete="org_type" />
-            <x-input-error class="mt-2" :messages="$errors->get('org_type')" />
+
+            <select id="org_type" name="org_type" required
+                    class="mt-2 block w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    onchange="toggleOtherInput()">
+                @if($employer->country)
+                    <option selected value="{{ $employer->org_type }}">{{ $employer->org_type }}</option>
+                @else
+                    <option selected disabled>Organization Type</option>
+                @endif
+
+                @foreach($organizationType as $item)
+                    <option value="{{ $item }}" {{ in_array($item, $selected) ? 'selected' : '' }}>
+                        {{ $item }}
+                    </option>
+                @endforeach
+                <option id="otherOption" value="other">Other...</option>
+            </select>
+
+            <input type="text" id="otherInput" class="mt-2 block w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" style="display:none;" placeholder="Organization Type" oninput="updateOtherOption()">
+
+            <x-input-error class="mt-2" :messages="$errors->get('country')" />
         </div>
+
+        <script>
+            function toggleOtherInput() {
+                var selectBox = document.getElementById('org_type');
+                var otherInput = document.getElementById('otherInput');
+                otherInput.style.display = selectBox.value === 'other' ? 'block' : 'none';
+            }
+
+            function updateOtherOption() {
+                var otherInput = document.getElementById('otherInput');
+                var otherOption = document.getElementById('otherOption');
+                if (otherInput.value.trim() !== '') {
+                    otherOption.value = otherInput.value;
+                } else {
+                    otherOption.value = 'other';
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                toggleOtherInput();
+            });
+        </script>
 
         <div>
             <x-input-label for="street" :value="__('Street')" />
@@ -83,7 +148,12 @@
             <x-input-label for="country" :value="__('Country')" />
             <select id="category" name="country" required=""
                 class="mt-2 block w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected > {{ $employer->country }}</option>
+                @if($employer->country)
+                    <option selected value="{{ $employer->country }}">{{ $employer->country }}</option>
+                @else
+                    <option selected disabled>Select Country</option>
+                @endif
+
                     @foreach($countries as $item)
                         <option value="{{ $item }}"
                         {{ in_array($item, $selected) ? 'selected' : '' }}>
@@ -93,6 +163,7 @@
                 </select>
             <x-input-error class="mt-2" :messages="$errors->get('country')" />
         </div>
+
     </div>
 
     <div class="mt-4">
@@ -122,7 +193,7 @@
             <x-text-input id="org_type" name="website" type="text" class="mt-1 block w-full text-gray-400" :value="old('website', $employer->website)" required autofocus autocomplete="org_type" />
             <x-input-error class="mt-2" :messages="$errors->get('org_type')" />
         </div>
-        
+
     </div>
 
 
@@ -149,3 +220,4 @@
         </div>
     </form>
 </section>
+

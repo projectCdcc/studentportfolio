@@ -1,4 +1,4 @@
-<nav x-data="{ open: true }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -20,13 +20,16 @@
                         </x-nav-link>
                     </div>
                 @endauth
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('job.list')" :active="request()->routeIs('job.list')">
                         {{ __('Jobs List') }}
                     </x-nav-link>
-
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
                                     {{ __('About') }}
                     </x-nav-link>
+                </div>
 
                     <!-- @auth
                         @if (Auth::user()->type == 'student')
@@ -143,6 +146,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endauth
 
 
             <!-- Hamburger -->
@@ -157,6 +161,7 @@
         </div>
     </div>
 
+    @if(!Auth::check())
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
@@ -166,9 +171,39 @@
             <x-responsive-nav-link :href="route('job.list')" :active="request()->routeIs('job.list')">
                 {{ __('Job Lists') }}
             </x-responsive-nav-link>
+             <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                {{ __('About') }}
+            </x-responsive-nav-link>
         </div>
 
+         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
 
+            <div class="px-4">
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200">
+                    <x-responsive-nav-link :href="route('login')">
+                        {{ __('Log in') }}
+                    </x-responsive-nav-link>
+                </div>
+                <br>
+            </div>
+
+                <div class="px-4">
+                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ __('Register') }}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ __('Register as a Student or Employer') }}</div>
+                        <div class="font-medium text-base text-gray-800 dark:text-gray-200">
+                            <x-responsive-nav-link :href="route('student.register.view')">
+                                {{ __('Student') }}
+                            </x-responsive-nav-link>
+                            <x-responsive-nav-link :href="route('empRegister.view')">
+                                {{ __('Employer') }}
+                            </x-responsive-nav-link>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    @else
+     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
@@ -177,6 +212,9 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                 <x-dropdown-link :href="Auth::check() ? (Auth::user()->type == 'student' ? route('student.dashboard') : route('employer.dashboard')) : null" :active="request()->routeIs(['student.dashboard', 'employer.dashboard'])">
+                            {{ __('Dashboard') }}
+                </x-dropdown-link>
                 @if ( Auth::user()->type === 'student')
                     <x-dropdown-link :href="route('student.profile.detail')">
                         {{ __('View Profile') }}
@@ -206,6 +244,6 @@
             </div>
         </div>
     </div>
+    @endif
 
-    @endauth
 </nav>

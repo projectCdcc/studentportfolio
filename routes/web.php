@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function() {
  Route::get('/view/employer/{id}', [StudentProfileController::class, 'viewEmployer'])->name('view.employer');
 
 
+
 /**
  *
  * Student cv routes

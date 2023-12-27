@@ -289,7 +289,55 @@
                                     </select>
                                 </div>
 
+
+                                <!-- Improve this job category  -->
                                 <div>
+                                    <x-input-label for="category" :value="__('Job Category')" />
+
+                                    <select id="jobCategorySelect" name="category" required
+                                            class="mt-2 block w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                            onchange="toggleOtherInputCategory()">
+                                            <option selected disabled>Organization Type</option>
+
+                                            @foreach($jobCategories as $item)
+                                                <option value="{{ $item }}" {{ in_array($item, $selected) ? 'selected' : '' }}>
+                                                    {{ $item }}
+                                                </option>
+                                            @endforeach
+                                        <option id="otherOption" value="other">Other...</option>
+
+                                    </select>
+
+                                    <input type="text" id="otherInput" class="mt-2 block w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" style="display:none;" placeholder="Job Category" oninput="updateOtherOption()">
+
+                                    <x-input-error class="mt-2" :messages="$errors->get('country')" />
+                                </div>
+
+                                <script>
+                                    function toggleOtherInputCategory() {
+                                        var selectBox = document.getElementById('jobCategorySelect');
+                                        var otherInput = document.getElementById('otherInput');
+                                        otherInput.style.display = selectBox.value === 'other' ? 'block' : 'none';
+                                    }
+
+                                    function updateOtherOption() {
+                                        var otherInput = document.getElementById('otherInput');
+                                        var otherOption = document.getElementById('otherOption');
+                                        if (otherInput.value.trim() !== '') {
+                                            otherOption.value = otherInput.value;
+                                        } else {
+                                            otherOption.value = 'other';
+                                        }
+                                    }
+
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        toggleOtherInputCategory();
+                                    });
+                                </script>
+
+                                 <!-- End Here  -->
+
+                                {{-- <div>
                                     <label for="category"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                                     <select id="category" name="category" required=""
@@ -304,7 +352,7 @@
                                     </select>
                                     </select>
                                 </div>
-
+ --}}
                                 <div class="sm:col-span-2">
                                     <label for="description"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
@@ -456,7 +504,7 @@
                                 <div>
                                     <label for="country"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
-                                    <select id="category" name="country" required=""
+                                    <select id="countryInput" name="country" required=""
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <option value="" disabled selected>Select Country</option>
                                         @foreach($countries as $item)
@@ -472,7 +520,7 @@
                                     <label for="jobType"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job
                                         Type</label>
-                                    <select id="category" name="type" required=""
+                                    <select id="jobTypeInput" name="type" required=""
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <option value="" disabled selected>Select jobtype</option>
                                         @foreach($jobType as $item)
@@ -484,10 +532,61 @@
                                     </select>
                                 </div>
 
+
+                                <!-- Category dropdown  -->
+
+                                <!-- Improve this job category  -->
+                                <div>
+                                    <x-input-label for="category" :value="__('Job Category')" />
+
+                                    <select id="categoryInput" name="category" required
+                                            class="mt-2 block w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                            onchange="toggleOtherInputCategoryEdit()">
+                                            <option selected disabled>Organization Type</option>
+
+                                            @foreach($jobCategories as $item)
+                                                <option value="{{ $item }}" {{ in_array($item, $selected) ? 'selected' : '' }}>
+                                                    {{ $item }}
+                                                </option>
+                                            @endforeach
+                                        <option id="otherOptionEdit" value="otherEdit">Other...</option>
+
+                                    </select>
+
+                                    <input type="text" id="otherInputEdit" class="mt-2 block w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" style="display:none;" placeholder="Job Category" oninput="updateOtherOptionEdit()">
+
+                                    <x-input-error class="mt-2" :messages="$errors->get('country')" />
+                                </div>
+
+                                <script>
+                                    function toggleOtherInputCategoryEdit() {
+                                        var selectBox = document.getElementById('categoryInput');
+                                        var otherInput = document.getElementById('otherInputEdit');
+                                        otherInput.style.display = selectBox.value === 'otherEdit' ? 'block' : 'none';
+                                    }
+
+                                    function updateOtherOptionEdit() {
+                                        var otherInput = document.getElementById('otherInputEdit');
+                                        var otherOption = document.getElementById('otherOptionEdit');
+                                        if (otherInput.value.trim() !== '') {
+                                            otherOption.value = otherInput.value;
+                                        } else {
+                                            otherOption.value = 'otherEdit';
+                                        }
+                                    }
+
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        toggleOtherInputCategoryEdit();
+                                    });
+                                </script>
+
+                                 <!-- End Here  -->
+{{--
+
                                 <div>
                                     <label for="category"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                                    <select id="category" name="category" required=""
+                                    <select id="categoryInput" name="category" required=""
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <option value="" disabled selected>Select an option</option>
                                         @foreach($jobCategories as $item)
@@ -498,7 +597,10 @@
                                         @endforeach
                                     </select>
                                     </select>
-                                </div>
+                                </div> --}}
+
+
+
 
                                 <div class="sm:col-span-2">
                                     <label for="description"
