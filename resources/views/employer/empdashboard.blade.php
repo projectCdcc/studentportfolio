@@ -22,17 +22,16 @@
                             <div class="mx-auto max-w-screen-lg px-2 sm:px-8">
                                 <div class="flex items-center justify-between pb-6">
                                     <div>
-                                        <h2 class="font-semibold text-gray-700">Students</h2>
-                                        <span class="text-xs text-gray-500">View accounts of registered students</span>
+                                        <h2 class="text-2xl font-semibold text-gray-700">Students</h2>
+                                        <span class="text-sm text-gray-500">View accounts of registered students</span>
                                     </div>
 
                                     <!-- Search -->
                                     <div class="flex items-center justify-between">
 
-
-
-
                                     </div>
+
+
                                 </div>
                                 @if(count($students) > 0)
                                 <div class="overflow-y-hidden rounded-lg border">
@@ -51,8 +50,9 @@
                                                     <th class="px-5 py-3">Major / Field of Study</th>
                                                 </tr>
                                             </thead>
-                                            @foreach($students as $data)
+
                                             <tbody id="initialStudentList" class="text-gray-500">
+                                                @foreach($students as $data)
                                                  <tr>
                                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                                                         <p class="whitespace-no-wrap">{{$data->id }}</p>
@@ -71,8 +71,9 @@
                                                         <p class="whitespace-no-wrap">{{ $data->major }}</p>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
-                                            @endforeach
+
 
 
                                             <!-- AJAX search results -->
@@ -129,26 +130,25 @@
                                         let debounceTimer;
                                         $('#search').on('keyup', function() {
                                             clearTimeout(debounceTimer);
-                                            let value = $(this).val();
+                                            let value = $(this).val().trim(); // Trim whitespace
 
-                                            if(value === '') {
-                                                // If the search field is empty, show the initial list and hide the AJAX list
-                                                $('#initialStudentList').show();
-                                                $('#ajaxStudentList').hide();
-                                            } else {
-                                                $('#loadingIndicator').show(); // Show loading indicator
+                                            // Toggle visibility of student lists based on search input
+                                            let isSearching = value !== '';
+                                            $('#initialStudentList').toggle(!isSearching);
+                                            $('#ajaxStudentList').toggle(isSearching);
+                                            $('#loadingIndicator').toggle(isSearching);
 
+                                            if (isSearching) {
                                                 debounceTimer = setTimeout(() => {
                                                     $.ajax({
                                                         type: 'get',
                                                         url: '{{ URL::to("search") }}',
                                                         data: { 'search': value },
                                                         success: function(data) {
-                                                            $('#initialStudentList').hide();
-                                                            $('#ajaxStudentList').show().html(data);
+                                                            $('#ajaxStudentList').html(data);
                                                         },
                                                         complete: function() {
-                                                            $('#loadingIndicator').hide(); // Hide loading indicator
+                                                            $('#loadingIndicator').hide();
                                                         }
                                                     });
                                                 }, 500); // Delay for 500 ms
@@ -156,6 +156,7 @@
                                         });
                                     });
                                 </script>
+
 
 
 
