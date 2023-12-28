@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\StudentRegisterController;
 use App\Http\Controllers\Student\StudentProfileController;
+use App\Http\Controllers\Student\StudentDashboardController;
 use App\Models\Job;
 use App\Http\Controllers\Employer\JobController;
 use App\Http\Controllers\Student\StudentCvController;
@@ -59,10 +60,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/student/register', [StudentRegisterController::class, 'store'])->name('student.Register.store');
 });
 
-Route::get('/student/dashboard', function () {
-    $jobs = Job::orderBy('created_at', 'desc')->paginate(6);
-    return view('student.student-dashboard')->with('jobs', $jobs);
-})->middleware(['auth', 'verified'])->name('student.dashboard');
+
+/**
+ *Student Dashboard Routes
+ *
+ */
+Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('student.dashboard');
+Route::get('/find',[StudentDashboardController::class, 'search'])->middleware(['auth', 'verified']);
+
 
 /**
  *

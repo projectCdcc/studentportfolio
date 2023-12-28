@@ -23,7 +23,7 @@
                                 <div class="flex items-center justify-between pb-6">
                                     <div>
                                         <h2 class="text-2xl font-semibold text-gray-700">Students</h2>
-                                        <span class="text-sm text-gray-500">View accounts of registered students</span>
+                                        <span class="text-sm text-gray-500">Browse Registered Student Profiles</span>
                                     </div>
 
                                     <!-- Search -->
@@ -80,6 +80,10 @@
                                             <tbody id="ajaxStudentList" style="display: none;"></tbody>
                                         </table>
                                     </div>
+                                    <div id="paginationLinks">
+                                        {{ $students->links() }}
+                                    </div>
+
                                 </div>
 
 
@@ -138,6 +142,9 @@
                                             $('#ajaxStudentList').toggle(isSearching);
                                             $('#loadingIndicator').toggle(isSearching);
 
+                                            // Assuming '#paginationLinks' is the ID of the element containing the pagination links
+                                             $('#paginationLinks').toggle(!isSearching);
+
                                             if (isSearching) {
                                                 debounceTimer = setTimeout(() => {
                                                     $.ajax({
@@ -145,7 +152,14 @@
                                                         url: '{{ URL::to("search") }}',
                                                         data: { 'search': value },
                                                         success: function(data) {
-                                                            $('#ajaxStudentList').html(data);
+                                                            if (data.trim().length === 0) {
+                                                                // If no data is returned, show a 'no records found' message
+                                                                $('#ajaxStudentList').html('<p class="my-2">No records found</p>');
+                                                                $('#paginationLinks').hide();
+                                                            } else {
+                                                                // If data is returned, populate the list with it
+                                                                $('#ajaxStudentList').html(data);
+                                                            }
                                                         },
                                                         complete: function() {
                                                             $('#loadingIndicator').hide();
@@ -156,6 +170,7 @@
                                         });
                                     });
                                 </script>
+
 
 
 
