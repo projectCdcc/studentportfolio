@@ -62,48 +62,50 @@
 
                                 <div id="ajaxJobList" style="display: none;"></div>
                                  <!-- Add a loading indicator with moving dots animation and larger font (hidden by default) -->
-                    <div id="loadingIndicator" class="my-4" style="display: none; font-size: 20px; text-align: center;">
-                        <div class="loader">
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                        </div>
-                        Loading...
-                    </div>
+                                    <div id="loadingIndicator" class="my-4" style="display: none; font-size: 20px; text-align: center;">
+                                        <div class="loader">
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        </div>
+                                        Loading...
+                                    </div>
 
-                    <style>
-                        .loader {
-                            display: flex;
-                            justify-content: center;
-                        }
+                                    <style>
+                                        .loader {
+                                            display: flex;
+                                            justify-content: center;
+                                        }
 
-                        .loader .dot {
-                            height: 10px;
-                            width: 10px;
-                            margin: 0 5px;
-                            background-color: #3498db;
-                            border-radius: 50%;
-                            opacity: 0.5;
-                            animation: blink 1.4s infinite both;
-                        }
+                                        .loader .dot {
+                                            height: 10px;
+                                            width: 10px;
+                                            margin: 0 5px;
+                                            background-color: #3498db;
+                                            border-radius: 50%;
+                                            opacity: 0.5;
+                                            animation: blink 1.4s infinite both;
+                                        }
 
-                        .loader .dot:nth-child(2) {
-                            animation-delay: 0.2s;
-                        }
+                                        .loader .dot:nth-child(2) {
+                                            animation-delay: 0.2s;
+                                        }
 
-                        .loader .dot:nth-child(3) {
-                            animation-delay: 0.4s;
-                        }
+                                        .loader .dot:nth-child(3) {
+                                            animation-delay: 0.4s;
+                                        }
 
-                        @keyframes blink {
-                            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
-                            30%, 50% { transform: scale(1); opacity: 1; }
-                        }
-                    </style>
+                                        @keyframes blink {
+                                            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+                                            30%, 50% { transform: scale(1); opacity: 1; }
+                                        }
+                                    </style>
                     <!-- Loading animation End here -->
                             </div>
                         </div>
-                        {{ $jobs->links() }}
+                        <div id="paginationLinks">
+                            {{ $students->links() }}
+                        </div>
                     </div>
 
                     <script type="text/javascript">
@@ -118,6 +120,9 @@
                                 $('#initialJobList').toggle(!isSearching);
                                 $('#ajaxJobList').toggle(isSearching);
                                 $('#loadingIndicator').toggle(isSearching);
+                                // Assuming '#paginationLinks' is the ID of the element containing the pagination links
+                                $('#paginationLinks').toggle(!isSearching);
+
 
                                 if (isSearching) {
                                     debounceTimer = setTimeout(() => {
@@ -132,6 +137,7 @@
                                                 } else {
                                                     // If no data is returned, display a no result found message
                                                     $('#ajaxJobList').html('<p class="my-2">No results found.</p>');
+                                                    $('#paginationLinks').hide();
                                                 }
                                             },
                                             complete: function() {
