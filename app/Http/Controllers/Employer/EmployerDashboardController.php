@@ -27,23 +27,25 @@ class EmployerDashboardController extends Controller
             // Initialize the query
             $query = Student::query();
 
-            // Check for an exact match first
-            $exactMatch = $query->where('username', $search)
+            // Search for all exact matches
+            $exactMatches = $query->where('username', $search)
                                 ->orWhere('email', $search)
                                 ->orWhere('major', $search)
-                                ->first();
+                                ->get();
 
-            if ($exactMatch) {
-                // If there is an exact match, return only that match
-                $students = collect([$exactMatch]);
+            // Check if there are exact matches
+            if ($exactMatches->isNotEmpty()) {
+                // If there are exact matches, return them
+                $students = $exactMatches;
             } else {
                 // If no exact match, perform the partial match search
                 $students = Student::where(function ($query) use ($search) {
-                    $query->where('username', 'LIKE', "%$search%")
-                          ->orWhere('email', 'LIKE', "%$search%")
-                          ->orWhere('major', 'LIKE', "%$search%");
-                })->get();
+                            $query->where('username', 'LIKE', "%$search%")
+                                ->orWhere('email', 'LIKE', "%$search%")
+                                ->orWhere('major', 'LIKE', "%$search%");
+                        })->get();
             }
+
 
             $output = '';
             foreach ($students as $student) {

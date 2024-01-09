@@ -26,27 +26,29 @@ class StudentDashboardController extends Controller
             // Initialize the query for Job model
             $query = Job::query();
 
-            // Check for an exact match in different fields
-            $exactMatch = $query->where('title', $search)
-                                ->orWhere('city', $search)
-                                ->orWhere('country', $search)
-                                ->orWhere('job_type', $search)
-                                ->orWhere('category', $search)
-                                ->first();
+            // Search for exact matches in different fields
+                $exactMatches = $query->where('title', $search)
+                                    ->orWhere('city', $search)
+                                    ->orWhere('country', $search)
+                                    ->orWhere('job_type', $search)
+                                    ->orWhere('category', $search)
+                                    ->get();
 
-            if ($exactMatch) {
-                // If there is an exact match, return only that match
-                $jobs = collect([$exactMatch]);
-            } else {
-                // If no exact match, perform a partial match search
-                $jobs = Job::where(function ($query) use ($search) {
-                    $query->where('title', 'LIKE', "%$search%")
-                          ->orWhere('city', 'LIKE', "%$search%")
-                          ->orWhere('country', 'LIKE', "%$search%")
-                          ->orWhere('job_type', 'LIKE', "%$search%")
-                          ->orWhere('category', 'LIKE', "%$search%");
-                })->get();
-            }
+                // Check if there are exact matches
+                if ($exactMatches->isNotEmpty()) {
+                        // If there are exact matches, return them
+                        $jobs = $exactMatches;
+                } else {
+                        // If no exact match, perform a partial match search
+                        $jobs = Job::where(function ($query) use ($search) {
+                        $query->where('title', 'LIKE', "%$search%")
+                        ->orWhere('city', 'LIKE', "%$search%")
+                        ->orWhere('country', 'LIKE', "%$search%")
+                        ->orWhere('job_type', 'LIKE', "%$search%")
+                        ->orWhere('category', 'LIKE', "%$search%");
+                        })->get();
+                }
+
 
             $output = '';
             foreach ($jobs as $job) {

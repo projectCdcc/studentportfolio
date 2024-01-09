@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div id="paginationLinks">
-                            {{ $students->links() }}
+                            {{ $jobs->links() }}
                         </div>
                     </div>
 
